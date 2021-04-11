@@ -13,6 +13,7 @@ package com.example.restaurantsystem;
         import com.google.firebase.auth.AuthResult;
         import com.google.firebase.auth.FirebaseAuth;
         import com.google.firebase.auth.FirebaseUser;
+
 public class Register extends AppCompatActivity {
     private FirebaseAuth mAuth;
 

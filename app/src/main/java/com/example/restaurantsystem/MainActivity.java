@@ -1,12 +1,16 @@
 package com.example.restaurantsystem;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import com.google.firebase.auth.FirebaseAuth;
+
+/**
+ * @author Ceyda Elmas and Humeyra Koseoglu
+ * @since 11.04.2021
+ * 20180808037 - 20180808015
+ */
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
