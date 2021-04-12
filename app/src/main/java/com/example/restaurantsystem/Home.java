@@ -57,13 +57,8 @@ public class Home extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        TextView textViewUser=(TextView) findViewById(R.id.home_textView2);
-        textViewUser.setText("Welcome, \n"+mAuth.getCurrentUser().getEmail());
+      /*  TextView textViewUser=(TextView) findViewById(R.id.home_textView2);
+        textViewUser.setText("Welcome, \n"+mAuth.getCurrentUser().getEmail());*/
     }
 
-    public void logout(View view){
-        mAuth.signOut();
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
-    }
 }
