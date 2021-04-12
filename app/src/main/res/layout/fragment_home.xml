@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+    tools:context=".FragmentHome"
+    android:background="#FFFFFF"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Button
+        android:background="@drawable/bg_button_black"
+        android:layout_height="35dp" android:layout_width="225dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:backgroundTint="#6A6868"
+        android:textColor="#6A6868"
+        android:text="Make a Reservation"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="91dp"
+        android:layout_marginEnd="91dp"
+        android:layout_marginLeft="101dp"
+        android:layout_marginStart="101dp"
+        android:id="@+id/fragmenthome_reservation_bttn"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/fragmenthome_viewPager"
+        android:layout_width="412dp"
+        android:layout_height="234dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="17dp"
+        android:clipToPadding="false"
+        android:foregroundGravity="center"
+        android:overScrollMode="never"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmenthome_logout" />
+
+    <ImageButton
+        android:id="@+id/fragmenthome_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="36dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/fragmenthome_viewPager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fragmenthome_textTaurus"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_baseline_person_50"
+        tools:ignore="VectorDrawableCompat" />
+
+    <TextView
+        android:id="@+id/fragmenthome_textTaurus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="41dp"
+        android:fontFamily="@font/yesevaoneregular"
+        android:text="TAURUS STEAKHOUSE"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/fragmenthome_viewPager"
+        app:layout_constraintEnd_toStartOf="@+id/fragmenthome_profile"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:layout_height="217dp"
+        android:layout_width="413dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/fragmenthome_listView"
+        app:layout_constraintTop_toBottomOf="@+id/fragmenthome_textEvents"
+        app:layout_constraintBottom_toTopOf="@+id/fragmenthome_reservation_bttn"/>
+
+    <TextView
+        android:id="@+id/fragmenthome_textEvents"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="177dp"
+        android:layout_marginLeft="177dp"
+        android:layout_marginEnd="192dp"
+        android:layout_marginRight="192dp"
+        android:layout_marginBottom="8dp"
+        android:text="Events"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/fragmenthome_listView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmenthome_viewPager" />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Past Events"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginBottom="1dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginLeft="313dp"
+        android:layout_marginStart="313dp"
+        android:id="@+id/fragmentHome_textView_pastEvents"
+        app:layout_constraintTop_toBottomOf="@+id/fragmenthome_viewPager"
+        android:layout_marginTop="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/fragmenthome_listView"/>
+
+    <TextView
+        android:id="@+id/fragmenthome_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="346dp"
+        android:layout_marginLeft="346dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="17dp"
+        android:text="Log out"
+        app:layout_constraintBottom_toTopOf="@+id/fragmenthome_viewPager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmenthome_profile" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

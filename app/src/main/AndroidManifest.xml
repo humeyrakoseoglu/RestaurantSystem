@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RestaurantSystem">
-        <activity android:name=".Home"></activity>
+        <activity android:name=".PastEvents"></activity>
+        <activity android:name=".Home" />
         <activity android:name=".Register" />
         <activity android:name=".Login" />
         <activity android:name=".MainActivity">
