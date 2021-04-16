@@ -38,5 +38,20 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/custom_textView_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="15dp"
+            android:background="@drawable/shape_rect"
+            android:drawableStart="@drawable/ic_time"
+            android:drawableLeft="@drawable/ic_time"
+            android:drawablePadding="3dp"
+            android:gravity="center_vertical"
+            android:padding="3dp"
+            android:text="dd/MM/yyyy"
+            android:textColor="#000" />
+
     </LinearLayout>
 </LinearLayout>

@@ -57,8 +57,6 @@ public class Home extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-      /*  TextView textViewUser=(TextView) findViewById(R.id.home_textView2);
-        textViewUser.setText("Welcome, \n"+mAuth.getCurrentUser().getEmail());*/
     }
 
 }

@@ -1,18 +1,34 @@
 package com.example.restaurantsystem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class PastEvents extends AppCompatActivity {
     private ActionBar actionBar;
     private ViewPager viewPager;
-    private ArrayList<MyPastEventModel> modelArrayList;
-    private MyAdapter myAdapter;
+    private PastEventAdapter myAdapter;
+    List<String> pastEventDateList;
+    List<String> pastEventTitlelist;
+    List<String> pastEventDescriptionlist;
+    Context context;
+    DatabaseReference databaseReference;
+
+    int[] pastEventImage={R.drawable.karsu, R.drawable.fazilsay,R.drawable.meksika_fajita
+            , R.drawable.iskandinav};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,14 +36,46 @@ public class PastEvents extends AppCompatActivity {
         setContentView(R.layout.activity_events);
         actionBar = getSupportActionBar();
 
-        viewPager = findViewById(R.id.fragmenthome_viewPager);
+        viewPager = findViewById(R.id.events_viewPager);
 
-        loadCards();
+        pastEventTitlelist=new ArrayList<>();
+        pastEventDescriptionlist=new ArrayList<>();
+        pastEventDateList =new ArrayList<>();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("PastEvents");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                pastEventDateList.clear();
+                pastEventDescriptionlist.clear();
+                pastEventTitlelist.clear();
+                for(DataSnapshot pastEventSnap : snapshot.getChildren()){
+                    MyPastEventModel myPastEventModel=pastEventSnap.getValue(MyPastEventModel.class);
+                    String pastEventTitle= myPastEventModel.getTitle();
+                    pastEventTitlelist.add(pastEventTitle);
+                    String pastEventDescription= myPastEventModel.getDescription();
+                    pastEventDescriptionlist.add(pastEventDescription);
+                    String pastEventDate= myPastEventModel.getDate();
+                    pastEventDateList.add(pastEventDate);
+                }
+
+                PastEventAdapter pastEventAdapter=new PastEventAdapter(getApplicationContext(),pastEventDateList,pastEventTitlelist,pastEventDescriptionlist,pastEventImage);
+                viewPager.setAdapter(pastEventAdapter);
+                viewPager.setPadding(100,0,100,0);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                String title = modelArrayList.get(position).getTitle();
+                String title = pastEventTitlelist.get(position);
                 actionBar.setTitle(title);
             }
 
@@ -42,24 +90,6 @@ public class PastEvents extends AppCompatActivity {
             }
         });
     }
-
-    private void loadCards() {
-        modelArrayList = new ArrayList<>();
-        modelArrayList.add(new MyPastEventModel("Karsu Dönmez Recital!","We had the honor of listening to the world-famous Turkish artist Karsu Dönmez's recital at our restaurant.",
-                "04/01/2021",R.drawable.karsu));
-        modelArrayList.add(new MyPastEventModel("Fazıl Say Concert!","We had the honor of listening to the world-famous Turkish pianist Fazıl Say's concert in our restaurant.",
-                "03/02/2021",R.drawable.fazilsay));
-        modelArrayList.add(new MyPastEventModel("Mexican Food Days!","Great tastes from traditional Mexican cuisine were at our restaurant.",
-                "02/01/2021",R.drawable.meksika_fajita));
-        modelArrayList.add(new MyPastEventModel("Nordic Food Days","Great tastes from traditional Nordic cuisine were at our restaurant.",
-                "01/02/2021",R.drawable.iskandinav));
-
-        myAdapter = new MyAdapter(this,modelArrayList);
-        viewPager.setAdapter(myAdapter);
-        viewPager.setPadding(100,0,100,0);
-
-    }
-
 
 
 }

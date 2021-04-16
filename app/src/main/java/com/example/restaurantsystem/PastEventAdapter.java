@@ -7,24 +7,29 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class PastEventAdapter extends PagerAdapter {
     Context context;
-    private ArrayList<MyPastEventModel> modelArrayList;
+    List<String> pastEventdatelist;
+    List<String> pastEventTitlelist;
+    List<String> pastEventDescriptionlist;
+    int [] pastEventImage;
 
-    public PastEventAdapter(Context context, ArrayList<MyPastEventModel> modelArrayList) {
+
+    public PastEventAdapter(Context context, List<String> pastEventdatelist, List<String> pastEventTitlelist, List<String> pastEventDescriptionlist, int[] pastEventImage) {
         this.context = context;
-        this.modelArrayList = modelArrayList;
+        this.pastEventdatelist = pastEventdatelist;
+        this.pastEventTitlelist = pastEventTitlelist;
+        this.pastEventDescriptionlist = pastEventDescriptionlist;
+        this.pastEventImage = pastEventImage;
     }
 
     @Override
     public int getCount() {
-        return modelArrayList.size();
+        return pastEventTitlelist.size();
     }
 
     @Override
@@ -40,25 +45,21 @@ public class PastEventAdapter extends PagerAdapter {
         ImageView bannerIv = view.findViewById(R.id.bannerIv);
         TextView titleTv = view.findViewById(R.id.titleTv);
         TextView descriptionTv = view.findViewById(R.id.descriptionTv);
-        TextView dateTv = view.findViewById(R.id.dateTv);
+        TextView dateTv = view.findViewById(R.id.custom_textView_date);
 
-        MyPastEventModel model = modelArrayList.get(position);
-        String title = model.getTitle();
-        String description = model.getDescription();
-        String date = model.getDate();
-        int image = model.getImage();
 
-        bannerIv.setImageResource(image);
-        titleTv.setText(title);
-        descriptionTv.setText(description);
-        dateTv.setText(date);
+        bannerIv.setImageResource(pastEventImage[position]);
+        descriptionTv.setText(pastEventDescriptionlist.get(position));
+        titleTv.setText(pastEventTitlelist.get(position));
+        dateTv.setText(pastEventdatelist.get(position));
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,title+"\n"+ description+"\n"+date,Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, titleTv.getText() + "\n" + descriptionTv.getText(), Toast.LENGTH_SHORT).show();
             }
         });
+
 
         container.addView(view,position);
 
@@ -69,4 +70,5 @@ public class PastEventAdapter extends PagerAdapter {
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View)object);
     }
+
 }

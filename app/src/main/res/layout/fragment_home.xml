@@ -27,7 +27,7 @@
         android:id="@+id/fragmenthome_reservation_bttn"/>
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/fragmenthome_viewPager"
+        android:id="@+id/events_viewPager"
         android:layout_width="412dp"
         android:layout_height="234dp"
         android:layout_centerInParent="true"
@@ -49,7 +49,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="36dp"
         android:background="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/fragmenthome_viewPager"
+        app:layout_constraintBottom_toTopOf="@+id/events_viewPager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/fragmenthome_textTaurus"
         app:layout_constraintTop_toTopOf="parent"
@@ -72,7 +72,7 @@
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/fragmenthome_viewPager"
+        app:layout_constraintBottom_toTopOf="@+id/events_viewPager"
         app:layout_constraintEnd_toStartOf="@+id/fragmenthome_profile"
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
@@ -104,7 +104,7 @@
         app:layout_constraintBottom_toTopOf="@+id/fragmenthome_listView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmenthome_viewPager" />
+        app:layout_constraintTop_toBottomOf="@+id/events_viewPager" />
 
     <TextView
         android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
         android:layout_marginLeft="313dp"
         android:layout_marginStart="313dp"
         android:id="@+id/fragmentHome_textView_pastEvents"
-        app:layout_constraintTop_toBottomOf="@+id/fragmenthome_viewPager"
+        app:layout_constraintTop_toBottomOf="@+id/events_viewPager"
         android:layout_marginTop="50dp"
         app:layout_constraintBottom_toTopOf="@+id/fragmenthome_listView"/>
 
@@ -134,7 +134,7 @@
         android:layout_marginRight="18dp"
         android:layout_marginBottom="17dp"
         android:text="Log out"
-        app:layout_constraintBottom_toTopOf="@+id/fragmenthome_viewPager"
+        app:layout_constraintBottom_toTopOf="@+id/events_viewPager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragmenthome_profile" />

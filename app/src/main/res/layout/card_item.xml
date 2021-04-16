@@ -43,7 +43,7 @@
                 android:layout_marginLeft="8dp" />
 
             <TextView
-                android:id="@+id/dateTv"
+                android:id="@+id/custom_textView_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"

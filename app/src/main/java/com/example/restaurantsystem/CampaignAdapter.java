@@ -1,5 +1,4 @@
 package com.example.restaurantsystem;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,26 +9,31 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class CampaignAdapter extends PagerAdapter{
     Context context;
-    private ArrayList<MyCampaignModel> modelArrayList;
+    List<String> campaignTitleList;
+    List<String> campaignDescriptionList;
+    int [] campaignImage;
 
-    public CampaignAdapter(Context context, ArrayList<MyCampaignModel> modelArrayList) {
+    public CampaignAdapter(Context context, List<String> campaignTitleList, List<String> campaignDescriptionList, int [] campaignImage) {
+        //super(context,R.layout.card_item2,R.id.titleTv);
         this.context = context;
-        this.modelArrayList = modelArrayList;
+        this.campaignTitleList = campaignTitleList;
+        this.campaignDescriptionList = campaignDescriptionList;
+        this.campaignImage = campaignImage;
     }
 
-    @Override
-    public int getCount() {
-        return modelArrayList.size();
-    }
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view.equals(object);
+    }
+
+    @Override
+    public int getCount() {
+        return campaignTitleList.size();
     }
 
     @NonNull
@@ -41,21 +45,15 @@ public class CampaignAdapter extends PagerAdapter{
         TextView titleTv = view.findViewById(R.id.titleTv);
         TextView descriptionTv = view.findViewById(R.id.descriptionTv);
 
-        MyCampaignModel model = modelArrayList.get(position);
-        String title = model.getTitle();
-        String description = model.getDescription();
-        int image = model.getImage();
-
-        bannerIv.setImageResource(image);
-        titleTv.setText(title);
-        descriptionTv.setText(description);
-
+        bannerIv.setImageResource(campaignImage[position]);
+        descriptionTv.setText(campaignDescriptionList.get(position));
+        titleTv.setText(campaignTitleList.get(position));
         view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context,title+"\n"+ description,Toast.LENGTH_SHORT).show();
-            }
-        });
+                                    @Override
+                                    public void onClick(View v) {
+                                            Toast.makeText(context, titleTv.getText() + "\n" + descriptionTv.getText(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
 
         container.addView(view,position);
 
@@ -66,5 +64,5 @@ public class CampaignAdapter extends PagerAdapter{
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View)object);
     }
-}
 
+}
