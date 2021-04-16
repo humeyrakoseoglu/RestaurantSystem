@@ -2,13 +2,14 @@ package com.example.restaurantsystem;
 
 public class MyPastEventModel {
     String title, description,date;
-    int image;
 
-    public MyPastEventModel(String title, String description, String date, int image) {
+    public MyPastEventModel(String title, String description, String date) {
         this.title = title;
         this.description = description;
         this.date = date;
-        this.image = image;
+    }
+
+    public MyPastEventModel() {
     }
 
     public String getTitle() {
@@ -35,11 +36,4 @@ public class MyPastEventModel {
         this.date = date;
     }
 
-    public int getImage() {
-        return image;
-    }
-
-    public void setImage(int image) {
-        this.image = image;
-    }
 }
