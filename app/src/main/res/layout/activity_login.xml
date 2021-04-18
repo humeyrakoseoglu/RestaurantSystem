@@ -4,8 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/blurbackground"
     tools:context=".Login">
+
+    <ImageView
+        android:id="@+id/imageView_login"
+        android:layout_width="535dp"
+        android:layout_height="758dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/login_email"
@@ -42,8 +50,8 @@
         android:layout_marginEnd="116dp"
         android:layout_marginRight="116dp"
         android:layout_marginBottom="215dp"
-        android:text="Create an account ?"
         android:onClick="register"
+        android:text="Create an account ?"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -106,13 +114,15 @@
         android:layout_marginRight="163dp"
         android:layout_marginBottom="63dp"
         android:background="@drawable/bg_button_white"
-        android:text="Sign in"
         android:onClick="login"
+        android:text="Sign in"
         android:textColor="#ffffff"
         app:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/login_textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_password" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

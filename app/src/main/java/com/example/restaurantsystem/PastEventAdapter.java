@@ -9,6 +9,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
+
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class PastEventAdapter extends PagerAdapter {
@@ -16,10 +19,10 @@ public class PastEventAdapter extends PagerAdapter {
     List<String> pastEventdatelist;
     List<String> pastEventTitlelist;
     List<String> pastEventDescriptionlist;
-    int [] pastEventImage;
+    List<String> pastEventImage;
 
 
-    public PastEventAdapter(Context context, List<String> pastEventdatelist, List<String> pastEventTitlelist, List<String> pastEventDescriptionlist, int[] pastEventImage) {
+    public PastEventAdapter(Context context, List<String> pastEventdatelist, List<String> pastEventTitlelist, List<String> pastEventDescriptionlist, List<String> pastEventImage) {
         this.context = context;
         this.pastEventdatelist = pastEventdatelist;
         this.pastEventTitlelist = pastEventTitlelist;
@@ -42,13 +45,14 @@ public class PastEventAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View view = LayoutInflater.from(context).inflate(R.layout.card_item, container,false);
 
-        ImageView bannerIv = view.findViewById(R.id.bannerIv);
+        ImageView bannerIv = view.findViewById(R.id.bannerIv_carditem1_pastEvent);
         TextView titleTv = view.findViewById(R.id.titleTv);
         TextView descriptionTv = view.findViewById(R.id.descriptionTv);
         TextView dateTv = view.findViewById(R.id.custom_textView_date);
 
 
-        bannerIv.setImageResource(pastEventImage[position]);
+        Picasso.get().load(pastEventImage.get(position)).into(bannerIv);
+
         descriptionTv.setText(pastEventDescriptionlist.get(position));
         titleTv.setText(pastEventTitlelist.get(position));
         dateTv.setText(pastEventdatelist.get(position));
