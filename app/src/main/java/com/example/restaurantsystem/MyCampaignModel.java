@@ -1,11 +1,13 @@
 package com.example.restaurantsystem;
 
 public class MyCampaignModel {
-    String title, description;
+    String title, description, image;
 
-    public MyCampaignModel(String title, String description) {
+    public MyCampaignModel(String title, String description, String image) {
         this.title = title;
         this.description = description;
+        this.image = image;
+
     }
 
     public MyCampaignModel() {
@@ -26,5 +28,14 @@ public class MyCampaignModel {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
 
 }

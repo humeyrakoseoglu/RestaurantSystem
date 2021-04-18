@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public     class EventAdapter extends ArrayAdapter<String> {
+public class EventAdapter extends ArrayAdapter<String> {
     Context context;
     List<String> date;
     List<String> description;
@@ -35,6 +35,7 @@ public     class EventAdapter extends ArrayAdapter<String> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater layoutInflater = (LayoutInflater) getContext().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View custom = layoutInflater.inflate(R.layout.custom,parent,false);
+
         ImageView images = custom.findViewById(R.id.custom_image);
         TextView myTitle = custom.findViewById(R.id.custom_textView_Title);
         TextView myDescription = custom.findViewById(R.id.custom_textView_SubTitle);
@@ -50,7 +51,6 @@ public     class EventAdapter extends ArrayAdapter<String> {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, myDate.getText(), Toast.LENGTH_SHORT).show();
-
             }
         });
 

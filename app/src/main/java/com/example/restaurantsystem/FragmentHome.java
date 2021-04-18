@@ -32,31 +32,33 @@ import java.util.List;
 public class FragmentHome extends Fragment {
     private ActionBar actionBar;
     private ViewPager viewPager;
-    private ArrayList<MyCampaignModel> modelArrayList;
     private CampaignAdapter campaignAdapter;
+    private EventAdapter eventAdapter;
     private FirebaseAuth mAuth;
+    DatabaseReference databaseReference;
 
     ListView listView;
-    List<String> titlelist;
-    List<String> dateList;
-    List<String> descriptionList;
+    List<String> eventTitleList;
+    List<String> eventDateList;
+    List<String> eventDescriptionList;
 
     List<String> campaignTitleList;
     List<String> campaignDescriptionList;
-
+    List<String> campaignImagesList;
 
     int[] eventIcons={R.drawable.ic_baseline_event_note_24,R.drawable.ic_baseline_event_note_24,R.drawable.ic_baseline_event_note_24};
-    int[] campaignImages={R.drawable.steak, R.drawable.burger_birthday,R.drawable.visa, R.drawable.sundaysale,R.drawable.adidas};
-    DatabaseReference databaseReference;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        mAuth = FirebaseAuth.getInstance();
+
         TextView tw = (TextView) view.findViewById(R.id.fragmentHome_textView_pastEvents);
         tw.setPaintFlags(tw.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
 
-        mAuth = FirebaseAuth.getInstance();
         tw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,8 +67,7 @@ public class FragmentHome extends Fragment {
                 startActivity(intent);
             }
 
-        }
-        );
+        });
 
 
         // Log Out Button
@@ -83,28 +84,31 @@ public class FragmentHome extends Fragment {
 
         //Events Listview
         listView =  view.findViewById(R.id.fragmenthome_listView);
-        titlelist=new ArrayList<>();
-        descriptionList=new ArrayList<>();
-        dateList=new ArrayList<>();
+        eventTitleList =new ArrayList<>();
+        eventDescriptionList =new ArrayList<>();
+        eventDateList =new ArrayList<>();
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Events");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                titlelist.clear();
-                dateList.clear();
-                descriptionList.clear();
+                eventTitleList.clear();
+                eventDateList.clear();
+                eventDescriptionList.clear();
                 for(DataSnapshot eventsDataSnap : snapshot.getChildren()){
                     Events events= eventsDataSnap.getValue(Events.class);
+
                     String title= events.getTitle();
-                    titlelist.add(title);
+                    eventTitleList.add(title);
+
                     String date= events.getDate();
-                    dateList.add(date);
+                    eventDateList.add(date);
+
                     String description= events.getDescription();
-                    descriptionList.add(description);
+                    eventDescriptionList.add(description);
                 }
-                EventAdapter adapt= new EventAdapter(getActivity(),eventIcons,dateList,titlelist,descriptionList);
-                listView.setAdapter(adapt);
+                eventAdapter= new EventAdapter(getActivity(),eventIcons, eventDateList, eventTitleList, eventDescriptionList);
+                listView.setAdapter(eventAdapter);
                 viewPager.setPadding(100,0,100,0);
             }
 
@@ -114,35 +118,41 @@ public class FragmentHome extends Fragment {
             }
         });
 
-
-
         //Campaigns ViewPager Slider
         actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         viewPager = view.findViewById(R.id.events_viewPager);
 
         campaignDescriptionList=new ArrayList<>();
         campaignTitleList=new ArrayList<>();
+        campaignImagesList = new ArrayList<>();
+
         databaseReference = FirebaseDatabase.getInstance().getReference("Campaign");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 campaignTitleList.clear();
                 campaignDescriptionList.clear();
+                campaignImagesList.clear();
+
                 for(DataSnapshot campaignDataSnap : snapshot.getChildren()){
                     MyCampaignModel myCampaignModel= campaignDataSnap.getValue(MyCampaignModel.class);
-                    assert myCampaignModel != null;
+
                     String title= myCampaignModel.getTitle();
                     campaignTitleList.add(title);
+
                     String description= myCampaignModel.getDescription();
                     campaignDescriptionList.add(description);
+
+                    String image= myCampaignModel.getImage();
+                    campaignImagesList.add(image);
                 }
-                CampaignAdapter campaignAdapter= new CampaignAdapter(getActivity(),campaignTitleList,campaignDescriptionList,campaignImages);
+
+                campaignAdapter= new CampaignAdapter(getActivity(),campaignTitleList,campaignDescriptionList, campaignImagesList);
                 viewPager.setAdapter(campaignAdapter);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 

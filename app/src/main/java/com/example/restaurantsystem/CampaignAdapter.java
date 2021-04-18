@@ -1,4 +1,5 @@
 package com.example.restaurantsystem;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,16 +10,19 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
+
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class CampaignAdapter extends PagerAdapter{
     Context context;
+
     List<String> campaignTitleList;
     List<String> campaignDescriptionList;
-    int [] campaignImage;
+    List<String>campaignImage;
 
-    public CampaignAdapter(Context context, List<String> campaignTitleList, List<String> campaignDescriptionList, int [] campaignImage) {
-        //super(context,R.layout.card_item2,R.id.titleTv);
+    public CampaignAdapter(Context context, List<String> campaignTitleList, List<String> campaignDescriptionList, List<String> campaignImage) {
         this.context = context;
         this.campaignTitleList = campaignTitleList;
         this.campaignDescriptionList = campaignDescriptionList;
@@ -41,19 +45,19 @@ public class CampaignAdapter extends PagerAdapter{
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View view = LayoutInflater.from(context).inflate(R.layout.card_item2, container,false);
 
-        ImageView bannerIv = view.findViewById(R.id.bannerIv);
+        ImageView bannerIv = view.findViewById(R.id.bannerIv_carditem2_campaign);
         TextView titleTv = view.findViewById(R.id.titleTv);
         TextView descriptionTv = view.findViewById(R.id.descriptionTv);
 
-        bannerIv.setImageResource(campaignImage[position]);
+        Picasso.get().load(campaignImage.get(position)).into(bannerIv);
         descriptionTv.setText(campaignDescriptionList.get(position));
         titleTv.setText(campaignTitleList.get(position));
         view.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                            Toast.makeText(context, titleTv.getText() + "\n" + descriptionTv.getText(), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, titleTv.getText() + "\n" + descriptionTv.getText(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         container.addView(view,position);
 

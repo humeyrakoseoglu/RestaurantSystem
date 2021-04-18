@@ -20,15 +20,13 @@ import java.util.List;
 public class PastEvents extends AppCompatActivity {
     private ActionBar actionBar;
     private ViewPager viewPager;
-    private PastEventAdapter myAdapter;
+    DatabaseReference databaseReference;
+
     List<String> pastEventDateList;
     List<String> pastEventTitlelist;
     List<String> pastEventDescriptionlist;
-    Context context;
-    DatabaseReference databaseReference;
+    List<String> pastEventImage;
 
-    int[] pastEventImage={R.drawable.karsu, R.drawable.fazilsay,R.drawable.meksika_fajita
-            , R.drawable.iskandinav};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +39,7 @@ public class PastEvents extends AppCompatActivity {
         pastEventTitlelist=new ArrayList<>();
         pastEventDescriptionlist=new ArrayList<>();
         pastEventDateList =new ArrayList<>();
+        pastEventImage = new ArrayList<>();
 
         databaseReference = FirebaseDatabase.getInstance().getReference("PastEvents");
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -49,6 +48,7 @@ public class PastEvents extends AppCompatActivity {
                 pastEventDateList.clear();
                 pastEventDescriptionlist.clear();
                 pastEventTitlelist.clear();
+                pastEventImage.clear();
                 for(DataSnapshot pastEventSnap : snapshot.getChildren()){
                     MyPastEventModel myPastEventModel=pastEventSnap.getValue(MyPastEventModel.class);
                     String pastEventTitle= myPastEventModel.getTitle();
@@ -57,6 +57,8 @@ public class PastEvents extends AppCompatActivity {
                     pastEventDescriptionlist.add(pastEventDescription);
                     String pastEventDate= myPastEventModel.getDate();
                     pastEventDateList.add(pastEventDate);
+                    String image= myPastEventModel.getImage();
+                    pastEventImage.add(image);
                 }
 
                 PastEventAdapter pastEventAdapter=new PastEventAdapter(getApplicationContext(),pastEventDateList,pastEventTitlelist,pastEventDescriptionlist,pastEventImage);
