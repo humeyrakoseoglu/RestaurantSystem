@@ -1,14 +1,14 @@
 package com.example.restaurantsystem;
 
-public class Events {
+public class MyEventsModel {
     String title;
     String date;
     String description;
 
-    public Events() {
+    public MyEventsModel() {
     }
 
-    public Events(String title, String date, String description) {
+    public MyEventsModel(String title, String date, String description) {
         this.title = title;
         this.date = date;
         this.description = description;
