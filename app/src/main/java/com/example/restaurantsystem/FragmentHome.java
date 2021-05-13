@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -81,6 +83,23 @@ public class FragmentHome extends Fragment {
             }
         });
 
+        //User Name
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference();
+        databaseReference.child("Users").child(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if(task.isSuccessful()){
+                    User user = task.getResult().getValue(User.class);
+                    TextView userName=getActivity().findViewById(R.id.textView_username);
+                    userName.setText(user.getName());
+                }else{
+                    System.out.println(task.getException().getMessage());
+                }
+            }
+        });
+
+
 
         //Events Listview
         listView =  view.findViewById(R.id.fragmenthome_listView);
@@ -96,15 +115,15 @@ public class FragmentHome extends Fragment {
                 eventDateList.clear();
                 eventDescriptionList.clear();
                 for(DataSnapshot eventsDataSnap : snapshot.getChildren()){
-                    Events events= eventsDataSnap.getValue(Events.class);
+                    MyEventsModel myEventsModel = eventsDataSnap.getValue(MyEventsModel.class);
 
-                    String title= events.getTitle();
+                    String title= myEventsModel.getTitle();
                     eventTitleList.add(title);
 
-                    String date= events.getDate();
+                    String date= myEventsModel.getDate();
                     eventDateList.add(date);
 
-                    String description= events.getDescription();
+                    String description= myEventsModel.getDescription();
                     eventDescriptionList.add(description);
                 }
                 eventAdapter= new EventAdapter(getActivity(),eventIcons, eventDateList, eventTitleList, eventDescriptionList);

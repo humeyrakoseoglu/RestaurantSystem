@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RestaurantSystem">
-        <activity android:name=".PastEvents"></activity>
+        <activity android:name=".Dessert"></activity>
+        <activity android:name=".Food" />
+        <activity android:name=".Drinks" />
+        <activity android:name=".PastEvents" />
         <activity android:name=".Home" />
         <activity android:name=".Register" />
         <activity android:name=".Login" />
