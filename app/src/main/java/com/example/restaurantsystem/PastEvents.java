@@ -32,6 +32,7 @@ public class PastEvents extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events);
+
         actionBar = getSupportActionBar();
 
         viewPager = findViewById(R.id.events_viewPager);
@@ -50,13 +51,17 @@ public class PastEvents extends AppCompatActivity {
                 pastEventTitlelist.clear();
                 pastEventImage.clear();
                 for(DataSnapshot pastEventSnap : snapshot.getChildren()){
-                    MyPastEventModel myPastEventModel=pastEventSnap.getValue(MyPastEventModel.class);
+                    MyPastEventModel myPastEventModel = pastEventSnap.getValue(MyPastEventModel.class);
+
                     String pastEventTitle= myPastEventModel.getTitle();
                     pastEventTitlelist.add(pastEventTitle);
+
                     String pastEventDescription= myPastEventModel.getDescription();
                     pastEventDescriptionlist.add(pastEventDescription);
+
                     String pastEventDate= myPastEventModel.getDate();
                     pastEventDateList.add(pastEventDate);
+
                     String image= myPastEventModel.getImage();
                     pastEventImage.add(image);
                 }
