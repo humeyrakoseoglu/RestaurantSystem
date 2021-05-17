@@ -1,15 +1,15 @@
 package com.example.restaurantsystem;
 
-public class MyMenuItemModel {
+public class MyItemModel {
     String image, price, title;
 
-    public MyMenuItemModel(String image, String price, String title) {
+    public MyItemModel(String image, String price, String title) {
         this.image = image;
         this.price = price;
         this.title = title;
     }
 
-    public MyMenuItemModel() {
+    public MyItemModel() {
     }
 
     public String getImage() {
