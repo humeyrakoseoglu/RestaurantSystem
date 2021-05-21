@@ -3,9 +3,12 @@ package com.example.restaurantsystem;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +50,7 @@ public class FragmentHome extends Fragment {
     List<String> campaignTitleList;
     List<String> campaignDescriptionList;
     List<String> campaignImagesList;
+    ImageButton imageView;
 
     int[] eventIcons={R.drawable.ic_baseline_event_note_24,R.drawable.ic_baseline_event_note_24,R.drawable.ic_baseline_event_note_24};
 
@@ -59,6 +63,7 @@ public class FragmentHome extends Fragment {
         mAuth = FirebaseAuth.getInstance();
 
         TextView tw = (TextView) view.findViewById(R.id.fragmentHome_textView_pastEvents);
+        imageView = (ImageButton) view.findViewById(R.id.fragmenthome_profile);
         tw.setPaintFlags(tw.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
 
         tw.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +74,14 @@ public class FragmentHome extends Fragment {
                 startActivity(intent);
             }
 
+        });
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT);
+                Intent intent = new Intent(getActivity(), UserProfile.class);
+                startActivity(intent);
+            }
         });
 
 
@@ -98,6 +111,7 @@ public class FragmentHome extends Fragment {
                 }
             }
         });
+
 
 
 
@@ -191,5 +205,6 @@ public class FragmentHome extends Fragment {
         });
         return view;
     }
+
 
 }

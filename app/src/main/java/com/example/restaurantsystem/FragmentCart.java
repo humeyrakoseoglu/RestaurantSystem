@@ -4,16 +4,114 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 public class FragmentCart extends Fragment {
+    CartAdapter cartAdapter;
+
+    List<String> menuTitleList;
+    List<String> menuImagesList;
+    List<String> menuPriceList;
+    List<String> menuQuantityList;
+    List<Double> totalPriceList;
+    double total;
+
+    private FirebaseAuth auth;
+
+    ListView listView;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_cart,container,false);
+
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference();
+
+        listView =  view.findViewById(R.id.fragmentcart_listView);
+        menuTitleList =new ArrayList<>();
+        menuImagesList =new ArrayList<>();
+        menuPriceList =new ArrayList<>();
+        menuQuantityList =new ArrayList<>();
+        totalPriceList = new ArrayList<>();
+        TextView totalPricetext = view.findViewById(R.id.totalPrice_textView);
+
+        auth = FirebaseAuth.getInstance();
+
+        String a=auth.getCurrentUser().getUid();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("Cart List").child("user "+a);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                menuTitleList.clear();
+                menuImagesList.clear();
+                menuPriceList.clear();
+                menuQuantityList.clear();
+
+                for(DataSnapshot cartDataSnap : snapshot.getChildren()){
+                    MyCartModel myCartModel = cartDataSnap.getValue(MyCartModel.class);
+
+                    String title= myCartModel.getTitle();
+                    menuTitleList.add(title);
+
+                    String image= myCartModel.getImage();
+                    menuImagesList.add(image);
+
+                    String quantity= myCartModel.getQuantity();
+                    menuQuantityList.add(quantity);
+
+                    String price= myCartModel.getPrice();
+                    menuPriceList.add(price);
+
+                    double quantityInt = Double.parseDouble(quantity);
+                    double priceInt = Double.parseDouble(price);
+                    double pricequantity= quantityInt*priceInt;
+                    totalPriceList.add(pricequantity);
+
+
+                }
+                for(int i=0;i<totalPriceList.size();i++){
+                    total+=totalPriceList.get(i);
+
+                }
+                NumberFormat formatter = new DecimalFormat("#0.00");
+
+                String total2 = String.valueOf(formatter.format(total));
+                totalPricetext.setText("Total Price: $"+total2);
+
+                cartAdapter= new CartAdapter(getActivity(),menuTitleList,menuImagesList,menuPriceList,menuQuantityList);
+                listView.setAdapter(cartAdapter);
+
+
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
         return view;
     }
 }
+
