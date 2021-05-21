@@ -36,7 +36,7 @@ public class MenuItemsAdapter extends ArrayAdapter<String>{
     List<String> title;
     List<String>image;
     List<String>price;
-    List<Integer>countlist = new ArrayList<>();
+    List<String>countlist = new ArrayList<>();
     List<Integer>countlist2 = new ArrayList<>();
     TextView productTitle, productPrice;
     ImageView productImage;
@@ -74,7 +74,7 @@ public class MenuItemsAdapter extends ArrayAdapter<String>{
         productPrice = custom.findViewById(R.id.custom_textView_price);
         cartButton = custom.findViewById(R.id.menu_addtocart_btn);
         elegantNumberButton = custom.findViewById(R.id.number_button);
-        countlist.add(Integer.parseInt(elegantNumberButton.getNumber()));
+        countlist.add(elegantNumberButton.getNumber());
 
         auth = FirebaseAuth.getInstance();
 
@@ -88,7 +88,7 @@ public class MenuItemsAdapter extends ArrayAdapter<String>{
             @Override
             public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
                 Log.d(TAG, String.format("oldValue: %d   newValue: %d", oldValue, newValue));
-                countlist.set(position,newValue);
+                countlist.set(position,String.valueOf(newValue));
             }
         });
 
@@ -105,7 +105,7 @@ public class MenuItemsAdapter extends ArrayAdapter<String>{
 
 
 
-    private void addtoCart(int position, List<Integer>countlist) {
+    private void addtoCart(int position, List<String>countlist) {
         String saveCurrentTime, saveCurrentDate;
         Calendar calForDate = Calendar.getInstance();
 
@@ -118,8 +118,8 @@ public class MenuItemsAdapter extends ArrayAdapter<String>{
         //final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("CartList");
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getInstance().getReference().child("Cart List");
         final HashMap<String, Object> cartMap = new HashMap<>();
-        cartMap.put("ptitle", title.get(position));
-        cartMap.put("pimage", image.get(position));
+        cartMap.put("title", title.get(position));
+        cartMap.put("image", image.get(position));
         cartMap.put("price", price.get(position));
         cartMap.put("date", saveCurrentDate);
         cartMap.put("time", saveCurrentTime);

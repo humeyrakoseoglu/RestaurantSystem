@@ -6,11 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".Dessert">
 
+    <ListView
+        android:id="@+id/dessert_listView"
+        android:layout_width="413dp"
+        android:layout_height="619dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dessert_textView" />
+
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/dessert_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="dessert"
-        tools:layout_editor_absoluteX="193dp"
-        tools:layout_editor_absoluteY="232dp" />
+        android:layout_marginStart="163dp"
+        android:layout_marginLeft="163dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="164dp"
+        android:layout_marginRight="164dp"
+        android:text="DESSERTS"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
