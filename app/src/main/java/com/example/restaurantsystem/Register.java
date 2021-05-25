@@ -69,7 +69,7 @@ public class Register extends AppCompatActivity {
     }
 
     public void createUser(View view){
-        EditText editTextEmail = (EditText) findViewById(R.id.register_email);
+        EditText editTextEmail = (EditText) findViewById(R.id.reservationTableNumber);
         String email = editTextEmail.getText().toString();
 
         EditText editTextPassword = (EditText) findViewById(R.id.register_password);
@@ -78,10 +78,10 @@ public class Register extends AppCompatActivity {
         EditText editTextConfirmPassword = (EditText) findViewById(R.id.register_confirmpassword);
         String confirmPassword = editTextConfirmPassword.getText().toString();
 
-        EditText editTextName = (EditText) findViewById(R.id.register_PersonName);
+        EditText editTextName = (EditText) findViewById(R.id.reservationDate);
         String name = editTextName.getText().toString();
 
-        EditText editTextSurname = (EditText) findViewById(R.id.register_surname);
+        EditText editTextSurname = (EditText) findViewById(R.id.reservationTime);
         String surname = editTextSurname.getText().toString();
 
         EditText editTextPhone = (EditText) findViewById(R.id.register_phone);
@@ -115,7 +115,6 @@ public class Register extends AppCompatActivity {
                                     }
                                 });
                             }
-
                         }
                     });
         }
