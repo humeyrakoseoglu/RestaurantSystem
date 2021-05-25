@@ -13,8 +13,8 @@ public class UserProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
     }
-    public void goFavourites(View view){
-        Intent intent= new Intent(this,Favourite.class);
+    public void goFavorites(View view){
+        Intent intent= new Intent(this, Favorite.class);
         startActivity(intent);
     }
 }
