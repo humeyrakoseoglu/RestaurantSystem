@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/reservationTime"
+        android:id="@+id/register_surname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="91dp"
@@ -34,10 +34,10 @@
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
         android:textColorHint="#F1F1F1"
-        app:layout_constraintBottom_toTopOf="@+id/reservationTableNumber"
+        app:layout_constraintBottom_toTopOf="@+id/register_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reservationDate" />
+        app:layout_constraintTop_toBottomOf="@+id/register_PersonName" />
 
     <Button
         android:id="@+id/register_button_signup"
@@ -83,7 +83,7 @@
         app:layout_constraintVertical_bias="0.286" />
 
     <EditText
-        android:id="@+id/reservationTableNumber"
+        android:id="@+id/register_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="91dp"
@@ -103,11 +103,11 @@
         app:layout_constraintBottom_toTopOf="@+id/register_phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reservationTime"
+        app:layout_constraintTop_toBottomOf="@+id/register_surname"
         />
 
     <EditText
-        android:id="@+id/reservationDate"
+        android:id="@+id/register_PersonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="91dp"
@@ -124,7 +124,7 @@
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
         android:textColorHint="#F1F1F1"
-        app:layout_constraintBottom_toTopOf="@+id/reservationTime"
+        app:layout_constraintBottom_toTopOf="@+id/register_surname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -141,8 +141,8 @@
         android:backgroundTint="@android:color/white"
         android:ems="10"
         android:hint="Birthday"
-        android:drawableEnd="@drawable/ic_baseline_date_range_24"
-        android:drawableRight="@drawable/ic_baseline_date_range_24"
+        android:drawableEnd="@drawable/ic_baseline_date_range_24_white"
+        android:drawableRight="@drawable/ic_baseline_date_range_24_white"
         android:drawablePadding="5dp"
         android:inputType="date"
         android:textColor="#FFFFFF"
@@ -219,7 +219,7 @@
         app:layout_constraintBottom_toTopOf="@+id/register_birthdate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reservationTableNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/register_email" />
 
     <ProgressBar
         android:id="@+id/progressBar"
