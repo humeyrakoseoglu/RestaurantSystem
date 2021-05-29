@@ -46,8 +46,8 @@
         android:layout_marginEnd="180dp"
         android:layout_marginRight="180dp"
         android:layout_marginBottom="44dp"
-        android:text="Locations"
-        android:onClick="goLocations"
+        android:text="Addresses"
+        android:onClick="goAddresses"
         app:layout_constraintBottom_toTopOf="@+id/textView12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

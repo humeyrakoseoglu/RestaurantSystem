@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Cards"></activity>
+        <activity android:name=".Addresses"></activity>
+        <activity android:name=".Cards" />
         <activity android:name=".Locations" />
         <activity android:name=".UpdateProfile" />
         <activity android:name=".CurrentReservations" />

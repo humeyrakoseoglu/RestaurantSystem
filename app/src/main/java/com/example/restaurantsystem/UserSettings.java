@@ -19,7 +19,7 @@ public class UserSettings extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void goLocations(View view){
+    public void goAddresses(View view){
         Intent intent= new Intent(this, Addresses.class);
         startActivity(intent);
     }
