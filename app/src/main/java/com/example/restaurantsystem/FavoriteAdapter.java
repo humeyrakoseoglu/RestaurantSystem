@@ -1,7 +1,6 @@
 package com.example.restaurantsystem;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,27 +22,22 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class CartAdapter  extends ArrayAdapter<String> {
+public class FavoriteAdapter extends ArrayAdapter<String> {
     Context context;
     List<String> title;
     List<String>image;
     List<String>price;
-    List<String>quantity;
-    Button removeProductButton;
+    Button removeFavoriteButton;
     private FirebaseAuth mAuth;
-    DatabaseReference cartListRef;
-    List<Double> totalPriceList;
+    DatabaseReference favoritesListRef;
 
 
-
-    public CartAdapter(Context context, List<String> title, List<String> image,List<String> price,List<String> quantity,  List<Double> totalPriceList) {
-        super(context,R.layout.card_item_cart,R.id.cart_textView_Title,title);
+    public FavoriteAdapter(Context context, List<String> title, List<String> image,List<String> price) {
+        super(context,R.layout.card_item_favorites,R.id.cart_textView_Title,title);
         this.context = context;
         this.title = title;
         this.image = image;
         this.price = price;
-        this.quantity = quantity;
-        this.totalPriceList = totalPriceList;
     }
 
 
@@ -52,29 +46,27 @@ public class CartAdapter  extends ArrayAdapter<String> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater layoutInflater = (LayoutInflater) getContext().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View custom = layoutInflater.inflate(R.layout.card_item_cart,parent,false);
+        View custom = layoutInflater.inflate(R.layout.card_item_favorites,parent,false);
 
         mAuth = FirebaseAuth.getInstance();
         String a=mAuth.getCurrentUser().getUid();
 
-        cartListRef= FirebaseDatabase.getInstance().getReference().child("Users").child(a).child("Cart List");
+        favoritesListRef= FirebaseDatabase.getInstance().getReference().child("Users").child(a)
+                .child("Favorites List");
 
-        ImageView images = custom.findViewById(R.id.cart_custom_image);
-        TextView myTitle = custom.findViewById(R.id.cart_textView_Title);
-        TextView myQuantiy = custom.findViewById(R.id.quantity_textView);
-        TextView myPrice = custom.findViewById(R.id.cart_textView_price);
-        removeProductButton = custom.findViewById(R.id.cart_removetocart_btn);
+        ImageView images = custom.findViewById(R.id.bannerIv_carditem_favorites);
+        TextView myTitle = custom.findViewById(R.id.titleTv_favorites);
+        TextView myPrice = custom.findViewById(R.id.favorites_textView_price);
+        removeFavoriteButton = custom.findViewById(R.id.remove_favorite_button);
 
         Picasso.get().load(image.get(position)).into(images);
         myTitle.setText(title.get(position));
         myPrice.setText(price.get(position));
-        myQuantiy.setText(quantity.get(position));
 
-        removeProductButton.setOnClickListener(new View.OnClickListener() {
+        removeFavoriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 remove(position);
-                totalPriceList.clear();
             }
         });
 
@@ -83,11 +75,11 @@ public class CartAdapter  extends ArrayAdapter<String> {
 
     private void remove(int position) {
         String productName= title.get(position);
-        cartListRef.child(productName).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+        favoritesListRef.child(productName).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(getContext(),"Product removed successfully",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"Favorite product removed successfully",Toast.LENGTH_SHORT).show();
                 }
             }
         });

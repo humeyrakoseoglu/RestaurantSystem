@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -8,35 +8,61 @@
 
 
     <ImageView
-        android:id="@+id/address_image"
-        android:layout_width="66dp"
-        android:layout_height="62dp"
+        android:id="@+id/address_image_cardItem"
+        android:layout_width="70dp"
+        android:layout_height="81dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/address_textView_fulladdress_cardItem"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_baseline_location_on_24"
         tools:ignore="VectorDrawableCompat" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/address_textView_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="Address Name"
-            android:textColor="#000"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/address_textView_name_cardItem"
+        android:layout_width="187dp"
+        android:layout_height="25dp"
+        android:layout_margin="5dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="11dp"
+        android:text="Address Name"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/address_image_cardItem"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/address_textView_fulladdress"
-            android:layout_width="314dp"
-            android:layout_height="61dp"
-            android:layout_margin="5dp"
-            android:text="Full Address"
-            android:textColor="#a9a9a9"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/address_textView_fulladdress_cardItem"
+        android:layout_width="240dp"
+        android:layout_height="38dp"
+        android:layout_margin="5dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="10dp"
+        android:text="Full Address"
+        android:textColor="#000"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/address_image_cardItem"
+        app:layout_constraintTop_toBottomOf="@+id/address_textView_name_cardItem" />
 
-    </LinearLayout>
-</LinearLayout>
+    <Button
+        android:id="@+id/delete_carditem_button"
+        android:layout_width="55dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginRight="19dp"
+        android:layout_marginBottom="23dp"
+        android:text="X"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/address_textView_fulladdress_cardItem" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

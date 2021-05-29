@@ -8,7 +8,7 @@
 
 
     <ImageView
-        android:id="@+id/address_image"
+        android:id="@+id/custom_event_image"
         android:layout_width="66dp"
         android:layout_height="62dp"
         app:srcCompat="@drawable/ic_baseline_person_50"
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/address_textView_name"
+            android:id="@+id/custom_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ttile"
@@ -29,7 +29,7 @@
             />
 
         <TextView
-            android:id="@+id/address_textView_fulladdress"
+            android:id="@+id/custom_description"
             android:layout_width="289dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"

@@ -1,5 +1,6 @@
 package com.example.restaurantsystem;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,10 +40,14 @@ public class MenuItemsAdapter extends ArrayAdapter<String>{
     List<String>price;
     List<String>countlist = new ArrayList<>();
     List<Integer>countlist2 = new ArrayList<>();
+    List<Integer>iconList = new ArrayList<>();
+
     TextView productTitle, productPrice;
     ImageView productImage;
     Button cartButton;
+    Button addFavoritesButton;
     ElegantNumberButton elegantNumberButton;
+
 
     private FirebaseAuth auth;
 
@@ -74,6 +80,7 @@ public class MenuItemsAdapter extends ArrayAdapter<String>{
         productPrice = custom.findViewById(R.id.custom_textView_price);
         cartButton = custom.findViewById(R.id.menu_addtocart_btn);
         elegantNumberButton = custom.findViewById(R.id.number_button);
+        addFavoritesButton = custom.findViewById(R.id.add_favorite_button);
         countlist.add(elegantNumberButton.getNumber());
 
         auth = FirebaseAuth.getInstance();
@@ -92,7 +99,6 @@ public class MenuItemsAdapter extends ArrayAdapter<String>{
             }
         });
 
-
             cartButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -100,10 +106,35 @@ public class MenuItemsAdapter extends ArrayAdapter<String>{
                 }
             });
 
+            addFavoritesButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    addtoFavorites(position);
+                }
+            });
+
         return custom;
     }
 
+    private void addtoFavorites(int position) {
 
+        String a=auth.getCurrentUser().getUid();
+        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getInstance().getReference().child("Users").child(a)
+               .child("Favorites List");
+        final HashMap<String, Object> favoritesMap = new HashMap<>();
+        favoritesMap.put("title", title.get(position));
+        favoritesMap.put("image", image.get(position));
+        favoritesMap.put("price", price.get(position));
+        String favoritesId = title.get(position);
+        cartListRef.child(favoritesId)
+                .updateChildren(favoritesMap)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(context,"Added To Favorites",Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 
     private void addtoCart(int position, List<String>countlist) {
         String saveCurrentTime, saveCurrentDate;
@@ -115,8 +146,9 @@ public class MenuItemsAdapter extends ArrayAdapter<String>{
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
         saveCurrentTime = currentTime.format(calForDate.getTime());
 
-        //final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("CartList");
-        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getInstance().getReference().child("Cart List");
+        String a=auth.getCurrentUser().getUid();
+
+        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getInstance().getReference().child("Users").child(a).child("Cart List");
         final HashMap<String, Object> cartMap = new HashMap<>();
         cartMap.put("title", title.get(position));
         cartMap.put("image", image.get(position));
@@ -125,11 +157,8 @@ public class MenuItemsAdapter extends ArrayAdapter<String>{
         cartMap.put("time", saveCurrentTime);
         cartMap.put("quantity", countlist.get(position));
 
-        String a=auth.getCurrentUser().getUid();
-
         String productID = title.get(position);
-        cartListRef.child("user "+a)
-                .child(productID)
+        cartListRef.child(productID)
                 .updateChildren(cartMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -139,34 +168,4 @@ public class MenuItemsAdapter extends ArrayAdapter<String>{
                 });
     }
 
-    /*private void addingToCartList(){
-        String saveCurrentTime, saveCurrentDate;
-        Calendar calForDate = Calendar.getInstance();
-        SimpleDateFormat currentDate= new SimpleDateFormat("MMM dd, yyyy");
-        saveCurrentDate = currentDate.format(calForDate.getTime());
-
-        SimpleDateFormat currentTime= new SimpleDateFormat("HH:mm:ss a");
-        saveCurrentTime = currentTime.format(calForDate.getTime());
-
-        final  DatabaseReference cartListRef = FirebaseDatabase.getInstance().getInstance().getReference().child("Cart List");
-
-        final HashMap<String, Object> cartMap = new HashMap<>();
-        cartMap.put("pid",productID);
-        cartMap.put("pname",productTitle.getText().toString());
-        cartMap.put("price",productPrice.getText().toString());
-        cartMap.put("date",saveCurrentDate);
-        cartMap.put("time",saveCurrentTime);
-        cartMap.put("quantity",numberButton.getNumber());
-        cartMap.put("discount","");
-
-        cartListRef.child("UserView").child(mAuth.getCurrentUser().getPhoneNumber())
-                .child("Drinks").child(productID).child(productID)
-                .updateChildren(cartMap)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                    }
-                });
-                }*/
 }
