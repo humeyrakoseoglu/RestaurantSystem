@@ -22,7 +22,7 @@ public class EventAdapter extends ArrayAdapter<String> {
     int [] rImgs;
 
     EventAdapter (Context c, int[]imgs,List<String> date,List<String> title,List<String> description){
-        super(c,R.layout.custom,R.id.custom_textView_Title,title);
+        super(c,R.layout.custom,R.id.address_textView_name,title);
         this.context=c;
         this.date=date;
         this.title=title;
@@ -36,9 +36,9 @@ public class EventAdapter extends ArrayAdapter<String> {
         LayoutInflater layoutInflater = (LayoutInflater) getContext().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View custom = layoutInflater.inflate(R.layout.custom,parent,false);
 
-        ImageView images = custom.findViewById(R.id.custom_image);
-        TextView myTitle = custom.findViewById(R.id.custom_textView_Title);
-        TextView myDescription = custom.findViewById(R.id.custom_textView_SubTitle);
+        ImageView images = custom.findViewById(R.id.address_image);
+        TextView myTitle = custom.findViewById(R.id.address_textView_name);
+        TextView myDescription = custom.findViewById(R.id.address_textView_fulladdress);
         TextView myDate= custom.findViewById(R.id.custom_textView_date);
 
         images.setImageResource(rImgs[position]);
