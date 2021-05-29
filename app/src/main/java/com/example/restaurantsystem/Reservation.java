@@ -136,8 +136,9 @@ public class Reservation extends AppCompatActivity {
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
         saveCurrentTime = currentTime.format(calForDate.getTime());
 
-        //final DatabaseReference reservationListRef = FirebaseDatabase.getInstance().getReference().child("CartList");
-        final DatabaseReference reservationListRef = FirebaseDatabase.getInstance().getInstance().getReference().child("Reservation List");
+        String a=auth.getCurrentUser().getUid();
+
+        final DatabaseReference reservationListRef = FirebaseDatabase.getInstance().getInstance().getReference().child("Users").child(a).child("Reservation List");
         final HashMap<String, Object> reservationMap = new HashMap<>();
         reservationMap.put("date", date);
         reservationMap.put("time", time);
@@ -146,12 +147,11 @@ public class Reservation extends AppCompatActivity {
         reservationMap.put("creationTime", saveCurrentTime);
 
 
-        String a=auth.getCurrentUser().getUid();
+
 
         String reservationtID = "created on "+saveCurrentDate+" "+saveCurrentTime;
 
-        reservationListRef.child("user "+a)
-                .child(reservationtID)
+        reservationListRef.child(reservationtID)
                 .updateChildren(reservationMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

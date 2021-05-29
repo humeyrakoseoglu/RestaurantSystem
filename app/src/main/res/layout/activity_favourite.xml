@@ -6,4 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".Favorite">
 
+    <ListView
+        android:id="@+id/favorites_listView"
+        android:layout_width="414dp"
+        android:layout_height="658dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/favorites_textView" />
+
+    <TextView
+        android:id="@+id/favorites_textView"
+        android:layout_width="192dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="109dp"
+        android:layout_marginLeft="109dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="110dp"
+        android:layout_marginRight="110dp"
+        android:layout_marginBottom="12dp"
+        android:text="FAVORITES"
+        android:textColor="#000000"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/favorites_listView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center_horizontal" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

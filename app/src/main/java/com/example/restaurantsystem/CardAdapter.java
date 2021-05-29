@@ -21,27 +21,26 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
-public class AddressAdapter extends ArrayAdapter<String> {
+public class CardAdapter extends ArrayAdapter<String> {
     Context context;
-    List<String> name;
-    List<String> address;
+    List<String> nameList;
+    List<String> numberList;
 
-     ImageView images;
-     TextView myName ;
-     TextView myAddress;
-     Button deleteButton;
-    String addressName,fullAddress;
+    ImageView images;
+    TextView myName ;
+    TextView myNumber;
+    Button deleteButton;
 
     private FirebaseAuth mAuth;
-    DatabaseReference addressListRef;
+    DatabaseReference cardListRef;
 
-     int icon;
+    int icon;
 
-    public AddressAdapter(Context context, List<String> name, List<String> address,int icon) {
-        super(context,R.layout.card_item_address,R.id.address_textView_name_cardItem,name);
+    public CardAdapter(Context context, List<String> nameList, List<String> numberList,int icon) {
+        super(context,R.layout.card_item_address,R.id.address_textView_name_cardItem,nameList);
         this.context = context;
-        this.name = name;
-        this.address = address;
+        this.nameList = nameList;
+        this.numberList = numberList;
         this.icon = icon;
     }
 
@@ -54,22 +53,18 @@ public class AddressAdapter extends ArrayAdapter<String> {
         mAuth = FirebaseAuth.getInstance();
         String a=mAuth.getCurrentUser().getUid();
 
-        addressListRef= FirebaseDatabase.getInstance().getReference().child("Users").child(a)
-                .child("Addresses");
-
+        cardListRef= FirebaseDatabase.getInstance().getReference().child("Users").child(a)
+                .child("Credit Cards");
 
         images = custom.findViewById(R.id.address_image_cardItem);
         myName = custom.findViewById(R.id.address_textView_name_cardItem);
-        myAddress = custom.findViewById(R.id.address_textView_fulladdress_cardItem);
+        myNumber = custom.findViewById(R.id.address_textView_fulladdress_cardItem);
         deleteButton = custom.findViewById(R.id.delete_carditem_button);
 
-        addressName = myName.getText().toString();
-        fullAddress = myAddress.getText().toString();
-
-
         images.setImageResource(icon);
-        myName.setText(name.get(position));
-        myAddress.setText(address.get(position));
+        myName.setText(nameList.get(position));
+        myNumber.setText(numberList.get(position));
+
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,15 +76,15 @@ public class AddressAdapter extends ArrayAdapter<String> {
     }
 
     private void remove(int position) {
-        String addressID = "address "+name.get(position);
-        addressListRef.child(addressID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+        String cardID = "card "+nameList.get(position);
+        cardListRef.child(cardID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(getContext(),"Address removed successfully",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"Card removed successfully",Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
-
 }
+

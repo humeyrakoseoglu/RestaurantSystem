@@ -50,13 +50,14 @@ public class FragmentCart extends Fragment {
         menuPriceList =new ArrayList<>();
         menuQuantityList =new ArrayList<>();
         totalPriceList = new ArrayList<>();
+
         TextView totalPricetext = view.findViewById(R.id.totalPrice_textView);
 
         auth = FirebaseAuth.getInstance();
 
         String a=auth.getCurrentUser().getUid();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Cart List").child("user "+a);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(a).child("Cart List");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -85,7 +86,6 @@ public class FragmentCart extends Fragment {
                     double pricequantity= quantityInt*priceInt;
                     totalPriceList.add(pricequantity);
 
-
                 }
                 for(int i=0;i<totalPriceList.size();i++){
                     total+=totalPriceList.get(i);
@@ -96,20 +96,15 @@ public class FragmentCart extends Fragment {
                 String total2 = String.valueOf(formatter.format(total));
                 totalPricetext.setText("Total Price: $"+total2);
 
-                cartAdapter= new CartAdapter(getActivity(),menuTitleList,menuImagesList,menuPriceList,menuQuantityList);
+                cartAdapter= new CartAdapter(getActivity(),menuTitleList,menuImagesList,menuPriceList,menuQuantityList,totalPriceList);
                 listView.setAdapter(cartAdapter);
-
-
             }
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-
-
 
         return view;
     }
