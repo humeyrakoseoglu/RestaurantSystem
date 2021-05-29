@@ -69,25 +69,25 @@ public class Register extends AppCompatActivity {
     }
 
     public void createUser(View view){
-        EditText editTextEmail = (EditText) findViewById(R.id.register_email);
+        EditText editTextEmail = (EditText) findViewById(R.id.update_email);
         String email = editTextEmail.getText().toString();
 
-        EditText editTextPassword = (EditText) findViewById(R.id.register_password);
+        EditText editTextPassword = (EditText) findViewById(R.id.update_password);
         String password = editTextPassword.getText().toString();
 
         EditText editTextConfirmPassword = (EditText) findViewById(R.id.register_confirmpassword);
         String confirmPassword = editTextConfirmPassword.getText().toString();
 
-        EditText editTextName = (EditText) findViewById(R.id.register_PersonName);
+        EditText editTextName = (EditText) findViewById(R.id.update_PersonName);
         String name = editTextName.getText().toString();
 
-        EditText editTextSurname = (EditText) findViewById(R.id.register_surname);
+        EditText editTextSurname = (EditText) findViewById(R.id.update_surname);
         String surname = editTextSurname.getText().toString();
 
-        EditText editTextPhone = (EditText) findViewById(R.id.register_phone);
+        EditText editTextPhone = (EditText) findViewById(R.id.update_phone);
         String phone = editTextPhone.getText().toString();
 
-        EditText editTextBirthday = (EditText) findViewById(R.id.register_birthdate);
+        EditText editTextBirthday = (EditText) findViewById(R.id.update_birthdate);
         String birthday = editTextBirthday.getText().toString();
 
         Intent intentlogin=new Intent(this,Login.class);

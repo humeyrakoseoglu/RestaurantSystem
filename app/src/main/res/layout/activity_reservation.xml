@@ -7,7 +7,7 @@
     tools:context=".Reservation">
 
     <Button
-        android:id="@+id/register_button_signup"
+        android:id="@+id/button_update"
         android:layout_width="103dp"
         android:layout_height="53dp"
         android:layout_marginStart="159dp"
@@ -18,13 +18,13 @@
         android:layout_marginBottom="172dp"
         android:background="@drawable/bg_button_black"
         android:fontFamily="@font/yesevaoneregular"
-        android:text="Make "
+        android:text="OK "
         android:textColor="#000000"
         app:backgroundTint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reservationTableNumber"
+        app:layout_constraintTop_toBottomOf="@+id/reservationPeopleNumber"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -67,7 +67,7 @@
         android:inputType="time"
         android:textColor="#000000"
         android:textColorHint="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/reservationTableNumber"
+        app:layout_constraintBottom_toTopOf="@+id/reservationPeopleNumber"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.736"
         app:layout_constraintStart_toStartOf="parent"
@@ -115,7 +115,7 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/reservationTableNumber"
+        android:id="@+id/reservationPeopleNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="91dp"
@@ -131,7 +131,7 @@
         android:inputType="number"
         android:textColor="#000000"
         android:textColorHint="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/register_button_signup"
+        app:layout_constraintBottom_toTopOf="@+id/button_update"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.736"
         app:layout_constraintStart_toStartOf="parent"
@@ -144,10 +144,10 @@
         android:layout_marginTop="61dp"
         android:layout_marginEnd="91dp"
         android:layout_marginRight="91dp"
-        app:layout_constraintBottom_toTopOf="@+id/reservationTableNumber"
+        app:layout_constraintBottom_toTopOf="@+id/reservationPeopleNumber"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/reservationTableNumber"
+        app:layout_constraintStart_toEndOf="@+id/reservationPeopleNumber"
         app:layout_constraintTop_toBottomOf="@+id/reservationTime"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/reservation" />

@@ -11,47 +11,32 @@
         android:id="@+id/address_image"
         android:layout_width="66dp"
         android:layout_height="62dp"
-        app:srcCompat="@drawable/ic_baseline_person_50"
+        app:srcCompat="@drawable/ic_baseline_location_on_24"
         tools:ignore="VectorDrawableCompat" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/address_textView_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ttile"
+            android:layout_margin="5dp"
+            android:text="Address Name"
             android:textColor="#000"
-            android:textStyle="bold"
-            android:layout_margin="5dp"
-            android:textSize="15sp"
-            />
-
-        <TextView
-            android:id="@+id/address_textView_fulladdress"
-            android:layout_width="289dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="Sub title"
-            android:textColor="#a9a9a9"
             android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/custom_textView_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_margin="15dp"
-            android:background="@drawable/shape_rect"
-            android:drawableStart="@drawable/ic_time"
-            android:drawableLeft="@drawable/ic_time"
-            android:drawablePadding="3dp"
-            android:gravity="center_vertical"
-            android:padding="3dp"
-            android:text="dd/MM/yyyy"
-            android:textColor="#000" />
+            android:id="@+id/address_textView_fulladdress"
+            android:layout_width="314dp"
+            android:layout_height="61dp"
+            android:layout_margin="5dp"
+            android:text="Full Address"
+            android:textColor="#a9a9a9"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 </LinearLayout>
