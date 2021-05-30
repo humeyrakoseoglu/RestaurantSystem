@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp">
+    <ImageView
+        android:id="@+id/cardimage_reservation"
+        android:layout_width="70dp"
+        android:layout_height="81dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/card_reservationtime"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/reserved"
+        tools:ignore="VectorDrawableCompat" />
+
+    <TextView
+        android:id="@+id/card_reservationDate"
+        android:layout_width="187dp"
+        android:layout_height="25dp"
+        android:layout_margin="5dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="11dp"
+        android:text="Reservation Date"
+        android:textColor="#000"
+        android:paddingLeft="8dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/cardimage_reservation"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/card_reservationtime"
+        android:layout_width="228dp"
+        android:layout_height="34dp"
+        android:layout_margin="5dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="10dp"
+        android:text="Reservation Time"
+        android:textColor="#000"
+        android:paddingLeft="8dp"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/cardimage_reservation"
+        app:layout_constraintTop_toBottomOf="@+id/card_reservationDate" />
+
+    <TextView
+        android:id="@+id/carditem_peopleNum"
+        android:layout_width="223dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginRight="90dp"
+        android:layout_marginBottom="10dp"
+        android:paddingLeft="8dp"
+        android:text="People Number"
+        android:textColor="#000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cardimage_reservation"
+        app:layout_constraintTop_toBottomOf="@+id/card_reservationtime" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -94,16 +94,7 @@ public class FragmentHome extends Fragment {
         });
 
 
-        // Log Out Button
-        TextView logout = (TextView) view.findViewById(R.id.fragmenthome_logout);
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-                Intent intent = new Intent(getActivity(),MainActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
         //User Name
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();

@@ -10,6 +10,9 @@ public class MyReservationModel {
         this.peopleNumber = peopleNumber;
     }
 
+    public MyReservationModel() {
+    }
+
     public String getDate() {
         return date;
     }

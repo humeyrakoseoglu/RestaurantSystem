@@ -4,21 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CurrentOrders">
+    tools:context=".UsersReservations">
+
     <ListView
-        android:id="@+id/currentorders_listView"
-        android:layout_width="404dp"
-        android:layout_height="646dp"
+        android:id="@+id/userreservation_listView"
+        android:layout_width="414dp"
+        android:layout_height="658dp"
         android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentorder_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/userreservation_textView" />
 
     <TextView
-        android:id="@+id/currentorder_textView"
-        android:layout_width="287dp"
-        android:layout_height="58dp"
+        android:id="@+id/userreservation_textView"
+        android:layout_width="363dp"
+        android:layout_height="45dp"
         android:layout_marginStart="109dp"
         android:layout_marginLeft="109dp"
         android:layout_marginTop="24dp"
@@ -26,12 +27,12 @@
         android:layout_marginRight="110dp"
         android:layout_marginBottom="12dp"
         android:gravity="center_horizontal"
-        android:text="Current Orders"
+        android:text="My Reservations"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/currentorders_listView"
+        app:layout_constraintBottom_toTopOf="@+id/userreservation_listView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

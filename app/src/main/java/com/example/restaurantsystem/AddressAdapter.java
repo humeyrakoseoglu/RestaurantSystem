@@ -26,10 +26,10 @@ public class AddressAdapter extends ArrayAdapter<String> {
     List<String> name;
     List<String> address;
 
-     ImageView images;
-     TextView myName ;
-     TextView myAddress;
-     Button deleteButton;
+    ImageView images;
+    TextView myName ;
+    TextView myAddress;
+    Button deleteButton;
     String addressName,fullAddress;
 
     private FirebaseAuth mAuth;

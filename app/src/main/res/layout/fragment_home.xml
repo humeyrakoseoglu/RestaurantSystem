@@ -10,35 +10,39 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <Button
-        android:background="@drawable/bg_button_black"
-        android:layout_height="35dp" android:layout_width="225dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:backgroundTint="#6A6868"
-        android:textColor="#6A6868"
-        android:text="Make a Reservation"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="91dp"
-        android:layout_marginEnd="91dp"
-        android:layout_marginLeft="101dp"
+        android:id="@+id/fragmenthome_reservation_bttn"
+        android:layout_width="225dp"
+        android:layout_height="35dp"
         android:layout_marginStart="101dp"
-        android:id="@+id/fragmenthome_reservation_bttn"/>
+        android:layout_marginLeft="101dp"
+        android:layout_marginEnd="91dp"
+        android:layout_marginRight="91dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_button_black"
+        android:text="Make a Reservation"
+        android:textColor="#6A6868"
+        app:backgroundTint="#6A6868"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmenthome_listView" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/events_viewPager"
         android:layout_width="412dp"
         android:layout_height="234dp"
         android:layout_centerInParent="true"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="25dp"
         android:clipToPadding="false"
         android:foregroundGravity="center"
         android:overScrollMode="never"
+        app:layout_constraintBottom_toTopOf="@+id/fragmenthome_textEvents"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmenthome_logout" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_username" />
 
     <ImageButton
         android:id="@+id/fragmenthome_profile"
@@ -47,13 +51,11 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginBottom="36dp"
         android:background="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/events_viewPager"
+        app:layout_constraintBottom_toTopOf="@+id/textView_username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/fragmenthome_textTaurus"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/ic_baseline_person_50"
         tools:ignore="VectorDrawableCompat" />
 
@@ -79,14 +81,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:layout_height="217dp"
-        android:layout_width="413dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/fragmenthome_listView"
-        app:layout_constraintTop_toBottomOf="@+id/fragmenthome_textEvents"
-        app:layout_constraintBottom_toTopOf="@+id/fragmenthome_reservation_bttn"/>
+        android:layout_width="413dp"
+        android:layout_height="217dp"
+        app:layout_constraintBottom_toTopOf="@+id/fragmenthome_reservation_bttn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmenthome_textEvents" />
 
     <TextView
         android:id="@+id/fragmenthome_textEvents"
@@ -125,33 +127,15 @@
         app:layout_constraintBottom_toTopOf="@+id/fragmenthome_listView"/>
 
     <TextView
-        android:id="@+id/fragmenthome_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="330dp"
-        android:layout_marginLeft="330dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginRight="35dp"
-        android:text="Log out"
-        app:layout_constraintBottom_toTopOf="@+id/events_viewPager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_username" />
-
-    <TextView
         android:id="@+id/textView_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="330dp"
         android:layout_marginLeft="330dp"
-        android:layout_marginTop="15dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:text="username"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/fragmenthome_logout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragmenthome_profile" />

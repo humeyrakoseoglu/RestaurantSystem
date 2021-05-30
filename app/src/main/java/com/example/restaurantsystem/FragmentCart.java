@@ -1,11 +1,14 @@
 package com.example.restaurantsystem;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,12 +33,18 @@ public class FragmentCart extends Fragment {
     List<String> menuImagesList;
     List<String> menuPriceList;
     List<String> menuQuantityList;
+
     List<Double> totalPriceList;
+    Button payButton;
+
     double total;
 
     private FirebaseAuth auth;
 
     ListView listView;
+    String total2;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,6 +61,7 @@ public class FragmentCart extends Fragment {
         totalPriceList = new ArrayList<>();
 
         TextView totalPricetext = view.findViewById(R.id.totalPrice_textView);
+        payButton = view.findViewById(R.id.cart_button);
 
         auth = FirebaseAuth.getInstance();
 
@@ -87,13 +97,14 @@ public class FragmentCart extends Fragment {
                     totalPriceList.add(pricequantity);
 
                 }
+                total=0;
                 for(int i=0;i<totalPriceList.size();i++){
                     total+=totalPriceList.get(i);
 
                 }
                 NumberFormat formatter = new DecimalFormat("#0.00");
 
-                String total2 = String.valueOf(formatter.format(total));
+                total2 = String.valueOf(formatter.format(total));
                 totalPricetext.setText("Total Price: $"+total2);
 
                 cartAdapter= new CartAdapter(getActivity(),menuTitleList,menuImagesList,menuPriceList,menuQuantityList,totalPriceList);
@@ -106,6 +117,17 @@ public class FragmentCart extends Fragment {
             }
         });
 
+        payButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "", Toast.LENGTH_SHORT);
+                Intent intent = new Intent(getContext(), Payment.class);
+                String totalPrice = String.valueOf(total2);
+                intent.putExtra("totalPrice", totalPrice);
+                startActivity(intent);
+
+            }
+        });
         return view;
     }
 }
