@@ -147,8 +147,6 @@ public class Reservation extends AppCompatActivity {
         reservationMap.put("creationTime", saveCurrentTime);
 
 
-
-
         String reservationtID = "created on "+saveCurrentDate+" "+saveCurrentTime;
 
         reservationListRef.child(reservationtID)

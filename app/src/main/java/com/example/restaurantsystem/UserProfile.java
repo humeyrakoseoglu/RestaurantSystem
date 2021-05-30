@@ -27,7 +27,7 @@ public class UserProfile extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         ImageButton settingsButton;
         settingsButton = findViewById(R.id.settings_imageButton);
-
+        TextView logout = findViewById(R.id.userprofile_logout);
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference();
@@ -53,8 +53,18 @@ public class UserProfile extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
 
+        // Log Out Button
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
     public void goFavorites(View view){
         Intent intent= new Intent(this, Favorite.class);
         startActivity(intent);
@@ -71,14 +81,8 @@ public class UserProfile extends AppCompatActivity {
     }
 
     public void goReservations(View view){
-        Intent intent= new Intent(this, CurrentReservations.class);
+        Intent intent= new Intent(this, UsersReservations.class);
         startActivity(intent);
     }
-
-    public void goSettings(View view){
-        Intent intent= new Intent(this, UserSettings.class);
-        startActivity(intent);
-    }
-
 
 }

@@ -63,7 +63,6 @@ public class Addresses extends AppCompatActivity {
                 address= fullAddress.getText().toString();
                 addAddress(name,address);
                 b=true;
-
             }
         });
         if(b=true){

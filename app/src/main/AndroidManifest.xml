@@ -9,11 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Addresses"></activity>
+        <activity android:name=".Payment" />
+        <activity android:name=".Addresses" />
         <activity android:name=".Cards" />
-        <activity android:name=".Locations" />
         <activity android:name=".UpdateProfile" />
-        <activity android:name=".CurrentReservations" />
+        <activity android:name=".UsersReservations" />
         <activity android:name=".CurrentOrders" />
         <activity android:name=".PastOrders" />
         <activity android:name=".UserSettings" />
@@ -34,6 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

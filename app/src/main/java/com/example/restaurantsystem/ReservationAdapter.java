@@ -54,47 +54,7 @@ public class ReservationAdapter  extends ArrayAdapter<String>  {
         myTime.setText(time);
         myPeopleNumber.setText(peopleNumber);
 
-        reservationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addReservation();
-            }
-        });
-
         return custom;
     }
 
-    public void addReservation(  ){
-        String saveCurrentTime, saveCurrentDate;
-        Calendar calForDate = Calendar.getInstance();
-
-        SimpleDateFormat currentDate = new SimpleDateFormat("MM dd, yyyy");
-        saveCurrentDate = currentDate.format(calForDate.getTime());
-
-        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
-        saveCurrentTime = currentTime.format(calForDate.getTime());
-
-        //final DatabaseReference reservationListRef = FirebaseDatabase.getInstance().getReference().child("CartList");
-        final DatabaseReference reservationListRef = FirebaseDatabase.getInstance().getInstance().getReference().child("Reservation List");
-        final HashMap<String, Object> reservationMap = new HashMap<>();
-        reservationMap.put("date", date);
-        reservationMap.put("time", time);
-        reservationMap.put("peopleNumber", peopleNumber);
-        reservationMap.put("creationDate", saveCurrentDate);
-        reservationMap.put("creationTime", saveCurrentTime);
-
-
-        String a=auth.getCurrentUser().getUid();
-
-        String reservationtID = time;
-        reservationListRef.child("user "+a)
-                .child(reservationtID)
-                .updateChildren(reservationMap)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(context,"AddedToReservation",Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
 }
