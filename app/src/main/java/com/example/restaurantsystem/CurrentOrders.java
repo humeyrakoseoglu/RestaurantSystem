@@ -19,7 +19,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class CurrentOrders extends AppCompatActivity {
@@ -31,7 +33,9 @@ public class CurrentOrders extends AppCompatActivity {
     List<String> currentOrderTimeList;
     List<String> productsList;
     DatabaseReference databaseReference;
+    DatabaseReference databaseReference2;
     int icon = R.drawable.current_order;
+    String total="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,61 +44,68 @@ public class CurrentOrders extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        FirebaseDatabase firebaseDatabase2 = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
+        databaseReference2 = firebaseDatabase2.getReference();
 
 
         listView =  findViewById(R.id.currentorders_listView);
+/*
+        Intent intent = getIntent();
+        total=intent.getStringExtra("totalPrice");
+        double totalprice= Double.parseDouble(total);
+*/
 
         currentOrderDateList =new ArrayList<>();
         currentOrderTimeList =new ArrayList<>();
         productsList =new ArrayList<>();
 
-           String a=auth.getCurrentUser().getUid();
-            databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(a).child("Order List").child("Current Orders");
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    currentOrderDateList.clear();
-                    currentOrderTimeList.clear();
-                    productsList.clear();
-                    for(DataSnapshot currentOrderDataSnap : snapshot.getChildren()){
-                        MyOrderModel myOrderModel = currentOrderDataSnap.getValue(MyOrderModel.class);
+        String a=auth.getCurrentUser().getUid();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(a).child("Order List").child("Current Orders");
+        databaseReference2 = firebaseDatabase2.getInstance().getReference("Users").child(a).child("Order List").child("Current Orders");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                currentOrderDateList.clear();
+                currentOrderTimeList.clear();
+                for(DataSnapshot currentOrderDataSnap : snapshot.getChildren()){
+                    MyOrderModel myOrderModel = currentOrderDataSnap.getValue(MyOrderModel.class);
 
-                        String date= myOrderModel.getDate();
-                        currentOrderDateList.add(date);
+                    String date= myOrderModel.getDate();
+                    currentOrderDateList.add(date);
 
-                        String time= myOrderModel.getTime();
-                        currentOrderTimeList.add(time);
-
-
-                        String orderID = "created on "+date+" "+time;
-                        databaseReference.child(orderID).child("Products");
-                        databaseReference.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for(DataSnapshot currentOrderProductDataSnap : snapshot.getChildren()){
-                                    MyGetProductModel myGetProductModel = currentOrderProductDataSnap.getValue(MyGetProductModel.class);
-                                    String title= myGetProductModel.getTitle();
-                                    productsList.add(title);
-                                }
-                            }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-
-
-                    }
-                    currentOrderAdapter= new CurrentOrderAdapter(getApplicationContext(),currentOrderDateList,currentOrderTimeList,productsList,icon);
-                    listView.setAdapter(currentOrderAdapter);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+                    String time= myOrderModel.getTime();
+                    currentOrderTimeList.add(time);
 
                 }
-            });
+                for (int i =0;i<currentOrderDateList.size();i++){
+                    String orderID = "created on "+currentOrderDateList.get(i)+" "+currentOrderTimeList.get(i);
+                    databaseReference2.child(orderID).child("Products");
+                    databaseReference2.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for(DataSnapshot currentOrderProductDataSnap : snapshot.getChildren()){
+                                MyGetProductModel myGetProductModel = currentOrderProductDataSnap.getValue(MyGetProductModel.class);
+                                String title= myGetProductModel.getTitle();
+                                productsList.add(title);
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                }
+                currentOrderAdapter= new CurrentOrderAdapter(getApplicationContext(),currentOrderDateList,currentOrderTimeList,productsList,icon);
+                listView.setAdapter(currentOrderAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
        /* databaseReference2=FirebaseDatabase.getInstance().getReference("Users").child(a).child("Order List").child("Current Orders").child("Products");
