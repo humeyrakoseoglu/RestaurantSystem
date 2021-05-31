@@ -43,6 +43,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:19.7.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.google.firebase:firebase-storage:19.2.2'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0'
     compile 'com.cepheuen.elegant-number-button:lib:1.0.2'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
