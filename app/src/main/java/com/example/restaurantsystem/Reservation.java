@@ -46,7 +46,6 @@ public class Reservation extends AppCompatActivity {
 
     Button makereservation;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +60,6 @@ public class Reservation extends AppCompatActivity {
 
         timeformat.setInputType(InputType.TYPE_NULL);
         dateformat.setInputType(InputType.TYPE_NULL);
-
 
         auth = FirebaseAuth.getInstance();
 
@@ -126,6 +124,8 @@ public class Reservation extends AppCompatActivity {
             }
         });
     }
+
+    //create reservation
     public void addReservation(String date, String time, String peopleNumber){
         String saveCurrentTime, saveCurrentDate;
         Calendar calForDate = Calendar.getInstance();
@@ -138,6 +138,7 @@ public class Reservation extends AppCompatActivity {
 
         String a=auth.getCurrentUser().getUid();
 
+        //load reservation informations to Firebase
         final DatabaseReference reservationListRef = FirebaseDatabase.getInstance().getInstance().getReference().child("Users").child(a).child("Reservation List");
         final HashMap<String, Object> reservationMap = new HashMap<>();
         reservationMap.put("date", date);
@@ -145,7 +146,6 @@ public class Reservation extends AppCompatActivity {
         reservationMap.put("peopleNumber", peopleNumber);
         reservationMap.put("creationDate", saveCurrentDate);
         reservationMap.put("creationTime", saveCurrentTime);
-
 
         String reservationtID = "created on "+saveCurrentDate+" "+saveCurrentTime;
 

@@ -8,9 +8,11 @@
 
     <ListView
         android:id="@+id/favorites_listView"
-        android:layout_width="404dp"
-        android:layout_height="646dp"
+        android:layout_width="407dp"
+        android:layout_height="631dp"
         android:layout_marginTop="12dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"

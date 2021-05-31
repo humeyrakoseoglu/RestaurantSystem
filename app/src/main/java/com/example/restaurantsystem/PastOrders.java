@@ -24,6 +24,8 @@ public class PastOrders extends AppCompatActivity {
     List<String> pastOrderDateList;
     List<String> pastOrderTimeList;
     List<String> pastOrderPriceList;
+    List<String> pastOrderCardList;
+    List<String> pastOrderAddressList;
 
     DatabaseReference databaseReference;
 
@@ -38,15 +40,17 @@ public class PastOrders extends AppCompatActivity {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
-
         listView =  findViewById(R.id.pastorders_listView);
 
         pastOrderDateList =new ArrayList<>();
         pastOrderTimeList =new ArrayList<>();
         pastOrderPriceList = new ArrayList<>();
-
+        pastOrderCardList = new ArrayList<>();
+        pastOrderAddressList = new ArrayList<>();
 
         String a=auth.getCurrentUser().getUid();
+
+        // retrieve past orders information from Past Orders in firebase
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(a).child("Order List").child("Past Orders");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -54,6 +58,8 @@ public class PastOrders extends AppCompatActivity {
                 pastOrderDateList.clear();
                 pastOrderTimeList.clear();
                 pastOrderPriceList.clear();
+                pastOrderCardList.clear();
+                pastOrderAddressList.clear();
                 for(DataSnapshot currentOrderDataSnap : snapshot.getChildren()){
                     MyOrderModel myOrderModel = currentOrderDataSnap.getValue(MyOrderModel.class);
 
@@ -66,8 +72,13 @@ public class PastOrders extends AppCompatActivity {
                     String totalPrice= myOrderModel.getTotalPrice();
                     pastOrderPriceList.add(totalPrice);
 
+                    String cardName= myOrderModel.getCardName();
+                    pastOrderCardList.add(cardName);
+
+                    String addressName= myOrderModel.getAddressName();
+                    pastOrderAddressList.add(addressName);
                 }
-                pastOrderAdapter= new PastOrderAdapter(getApplicationContext(),pastOrderDateList,pastOrderTimeList,pastOrderPriceList,icon);
+                pastOrderAdapter= new PastOrderAdapter(getApplicationContext(),pastOrderDateList,pastOrderTimeList,pastOrderPriceList,icon,pastOrderCardList,pastOrderAddressList);
                 listView.setAdapter(pastOrderAdapter);
             }
 

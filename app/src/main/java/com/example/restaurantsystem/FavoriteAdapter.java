@@ -40,8 +40,6 @@ public class FavoriteAdapter extends ArrayAdapter<String> {
         this.price = price;
     }
 
-
-
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -73,6 +71,7 @@ public class FavoriteAdapter extends ArrayAdapter<String> {
         return custom;
     }
 
+    // remove favorite product from Favorites List
     private void remove(int position) {
         String productName= title.get(position);
         favoritesListRef.child(productName).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -67,6 +67,7 @@ public class FragmentCart extends Fragment {
 
         String a=auth.getCurrentUser().getUid();
 
+        //retrieve product where in cart information from cart list in firebase
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(a).child("Cart List");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -100,11 +101,10 @@ public class FragmentCart extends Fragment {
                 total=0;
                 for(int i=0;i<totalPriceList.size();i++){
                     total+=totalPriceList.get(i);
-
                 }
                 NumberFormat formatter = new DecimalFormat("#0.00");
 
-                total2 = String.valueOf(formatter.format(total));
+                total2 = formatter.format(total);
                 totalPricetext.setText("Total Price: $"+total2);
 
                 cartAdapter= new CartAdapter(getActivity(),menuTitleList,menuImagesList,menuPriceList,menuQuantityList,totalPriceList);
@@ -131,4 +131,3 @@ public class FragmentCart extends Fragment {
         return view;
     }
 }
-

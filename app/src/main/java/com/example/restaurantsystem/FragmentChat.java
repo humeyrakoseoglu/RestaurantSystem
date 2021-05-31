@@ -85,6 +85,7 @@ public class FragmentChat extends Fragment {
         });
         return view;
     }
+
     boolean isLastVisible() {
         LinearLayoutManager layoutManager = ((LinearLayoutManager) recyclerView.getLayoutManager());
         int pos = layoutManager.findLastCompletelyVisibleItemPosition();

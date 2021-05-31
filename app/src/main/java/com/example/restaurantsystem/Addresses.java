@@ -42,8 +42,7 @@ public class Addresses extends AppCompatActivity {
         setContentView(R.layout.activity_addresses);
         auth = FirebaseAuth.getInstance();
 
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference();
+        DatabaseReference databaseReference;
         addressName = findViewById(R.id.textView_addressName);
         fullAddress = findViewById(R.id.textView_fulladdress);
         addAddressButton = findViewById(R.id.add_address_button);
@@ -65,6 +64,8 @@ public class Addresses extends AppCompatActivity {
                 b=true;
             }
         });
+
+        //retrieve address information from firebase
         if(b=true){
             String a=auth.getCurrentUser().getUid();
             databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(a).child("Addresses");
@@ -99,8 +100,7 @@ public class Addresses extends AppCompatActivity {
         }
     }
 
-
-
+    // add address to Registered Address List
     public void addAddress(String name, String address){
 
         final DatabaseReference addressListRef = FirebaseDatabase.getInstance().getInstance().getReference().child("Users");

@@ -8,13 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.squareup.picasso.Picasso;
-
 import java.util.List;
 
 public class MenuAdapter  extends ArrayAdapter<String> {
@@ -27,10 +23,7 @@ public class MenuAdapter  extends ArrayAdapter<String> {
         this.context = context;
         this.title = title;
         this.image = image;
-
     }
-
-
 
     @NonNull
     @Override

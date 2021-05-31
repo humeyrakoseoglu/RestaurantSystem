@@ -31,6 +31,7 @@ public class UpdateProfile extends AppCompatActivity {
         reference= FirebaseDatabase.getInstance().getReference("Users").child(mAuth.getCurrentUser().getUid());
         DatabaseReference databaseReference = firebaseDatabase.getReference();
 
+        //retrieve user information from Firebase for update
         databaseReference.child("Users").child(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -51,7 +52,6 @@ public class UpdateProfile extends AppCompatActivity {
                     birthdate=userBirthdate.getText().toString();
                     password=userPassword.getText().toString();
 
-
                     userName.setText(user.getName());
                     userSurname.setText(user.getSurname());
                     userEmail.setText(user.getEmail());
@@ -64,12 +64,10 @@ public class UpdateProfile extends AppCompatActivity {
             }
         });
 
-
-
     }
 
+    // update information
     public void update(View view){
-
         if(isNameChanged()|| isSurnameChanged()||isEmailChanged()||isBirthdateChanged()||isPhoneChanged()||isPasswordChanged()){
             Toast.makeText(this,"Profile informations have been updated.",Toast.LENGTH_SHORT).show();
             

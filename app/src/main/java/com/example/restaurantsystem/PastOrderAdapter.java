@@ -5,23 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 
 public class PastOrderAdapter  extends ArrayAdapter<String> {
@@ -29,23 +18,29 @@ public class PastOrderAdapter  extends ArrayAdapter<String> {
     List<String> date;
     List<String> time;
     List<String> priceList;
+    List<String> cardList;
+    List<String> addressList;
 
     ImageView images;
     TextView myDate;
     TextView myTime;
     TextView myPrice;
+    TextView myCard;
+    TextView myAddress;
 
     String createdDate,createdTime;
 
     int icon;
 
-    public PastOrderAdapter(Context context, List<String> date, List<String> time, List<String> priceList,int icon) {
-        super(context,R.layout.card_item_pastorders,R.id.pastorders_textView_date_cardItem,date);
+    public PastOrderAdapter(Context context, List<String> date, List<String> time, List<String> priceList,int icon,  List<String> cardList, List<String> addressList) {
+        super(context,R.layout.card_item_pastorders,R.id.textView_pastcardName,cardList);
         this.context = context;
         this.date = date;
         this.time = time;
         this.icon = icon;
         this.priceList = priceList;
+        this.cardList = cardList;
+        this.addressList = addressList;
     }
 
 
@@ -59,6 +54,8 @@ public class PastOrderAdapter  extends ArrayAdapter<String> {
         myDate = custom.findViewById(R.id.pastorders_textView_date_cardItem);
         myTime = custom.findViewById(R.id.pastorders_textView_time_cardItem);
         myPrice = custom.findViewById(R.id.textView_totalPrice_pastorder);
+        myCard = custom.findViewById(R.id.textView_pastcardName);
+        myAddress = custom.findViewById(R.id.textView_pastaddress);
 
         createdDate = myDate.getText().toString();
         createdTime = myTime.getText().toString();
@@ -66,9 +63,10 @@ public class PastOrderAdapter  extends ArrayAdapter<String> {
         images.setImageResource(icon);
         myDate.setText(date.get(position));
         myTime.setText(time.get(position));
-        myPrice.setText(priceList.get(position));
+        myPrice.setText("$"+priceList.get(position));
+        myCard.setText("Card Name: "+cardList.get(position));
+        myAddress.setText("Address Name: " +addressList.get(position));
 
         return custom;
     }
-
 }

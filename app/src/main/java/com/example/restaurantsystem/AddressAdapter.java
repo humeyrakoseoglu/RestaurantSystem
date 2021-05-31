@@ -70,6 +70,7 @@ public class AddressAdapter extends ArrayAdapter<String> {
         images.setImageResource(icon);
         myName.setText(name.get(position));
         myAddress.setText(address.get(position));
+
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +81,7 @@ public class AddressAdapter extends ArrayAdapter<String> {
         return custom;
     }
 
+    // remove address from Registered Addresses
     private void remove(int position) {
         String addressID = "address "+name.get(position);
         addressListRef.child(addressID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -94,9 +94,7 @@ public class FragmentHome extends Fragment {
         });
 
 
-
-
-        //User Name
+        //retrieve User Name from firebase
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference();
         databaseReference.child("Users").child(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -113,14 +111,13 @@ public class FragmentHome extends Fragment {
         });
 
 
-
-
         //Events Listview
         listView =  view.findViewById(R.id.fragmenthome_listView);
         eventTitleList =new ArrayList<>();
         eventDescriptionList =new ArrayList<>();
         eventDateList =new ArrayList<>();
 
+        //retrieve events information from firebase
         databaseReference = FirebaseDatabase.getInstance().getReference("Events");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -159,6 +156,7 @@ public class FragmentHome extends Fragment {
         campaignTitleList=new ArrayList<>();
         campaignImagesList = new ArrayList<>();
 
+        //retrieve campaigns information from firebase
         databaseReference = FirebaseDatabase.getInstance().getReference("Campaign");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -205,6 +203,5 @@ public class FragmentHome extends Fragment {
         });
         return view;
     }
-
 
 }

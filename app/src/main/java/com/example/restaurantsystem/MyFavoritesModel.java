@@ -6,9 +6,7 @@ public class MyFavoritesModel {
     public MyFavoritesModel(String title, String image,String price) {
         this.title = title;
         this.image = image;
-
         this.price = price;
-
     }
 
     public MyFavoritesModel() {
@@ -38,4 +36,3 @@ public class MyFavoritesModel {
         this.image = image;
     }
 }
-

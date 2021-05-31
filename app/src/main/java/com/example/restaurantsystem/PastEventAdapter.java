@@ -21,7 +21,6 @@ public class PastEventAdapter extends PagerAdapter {
     List<String> pastEventDescriptionlist;
     List<String> pastEventImage;
 
-
     public PastEventAdapter(Context context, List<String> pastEventdatelist, List<String> pastEventTitlelist, List<String> pastEventDescriptionlist, List<String> pastEventImage) {
         this.context = context;
         this.pastEventdatelist = pastEventdatelist;
@@ -63,7 +62,6 @@ public class PastEventAdapter extends PagerAdapter {
                 Toast.makeText(context, titleTv.getText() + "\n" + descriptionTv.getText(), Toast.LENGTH_SHORT).show();
             }
         });
-
 
         container.addView(view,position);
 

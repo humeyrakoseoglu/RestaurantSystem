@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/pastorders_image_cardItem"
-        android:layout_width="80dp"
-        android:layout_height="140dp"
+        android:layout_width="81dp"
+        android:layout_height="171dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginBottom="5dp"
@@ -26,8 +26,8 @@
         android:layout_width="187dp"
         android:layout_height="25dp"
         android:layout_margin="5dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginLeft="3dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
         android:layout_marginTop="11dp"
         android:text="Your order is delivered"
         android:textColor="#000"
@@ -52,38 +52,17 @@
 
 
     <TextView
-        android:id="@+id/textView_products_pastorders"
-        android:layout_width="122dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="92dp"
-        android:layout_marginLeft="92dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="6dp"
-        android:layout_marginRight="6dp"
-        android:layout_marginBottom="49dp"
-        android:gravity="center_horizontal"
-        android:text="Details"
-        android:textAlignment="center"
-        android:textColor="#000"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.826"
-        app:layout_constraintStart_toEndOf="@+id/pastorders_textView_time_cardItem"
-        app:layout_constraintTop_toBottomOf="@+id/pastorders_textView_name_cardItem" />
-
-    <TextView
         android:id="@+id/pastorders_textView_time_cardItem"
         android:layout_width="112dp"
         android:layout_height="29dp"
         android:layout_marginStart="7dp"
         android:layout_marginLeft="7dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="6dp"
         android:text="Time"
         android:textColor="#000"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/pastorders_image_cardItem"
-        app:layout_constraintTop_toBottomOf="@+id/pastorders_textView_date_cardItem" />
+        app:layout_constraintStart_toEndOf="@+id/pastorders_textView_date_cardItem"
+        app:layout_constraintTop_toBottomOf="@+id/pastorders_textView_name_cardItem" />
 
     <TextView
         android:id="@+id/textView_totalPrice_pastorder"
@@ -91,12 +70,38 @@
         android:layout_height="29dp"
         android:layout_marginStart="7dp"
         android:layout_marginLeft="7dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:text="Total Price"
         android:textColor="#000"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/pastorders_image_cardItem"
+        app:layout_constraintTop_toBottomOf="@+id/textView_pastcardName" />
+
+    <TextView
+        android:id="@+id/textView_pastaddress"
+        android:layout_width="250dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="10dp"
+        android:text="Address"
+        android:textColor="#000"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/pastorders_image_cardItem"
         app:layout_constraintTop_toBottomOf="@+id/pastorders_textView_time_cardItem" />
+
+    <TextView
+        android:id="@+id/textView_pastcardName"
+        android:layout_width="250dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="10dp"
+        android:text="Card Name"
+        android:textColor="#000"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/pastorders_image_cardItem"
+        app:layout_constraintTop_toBottomOf="@+id/textView_pastaddress" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

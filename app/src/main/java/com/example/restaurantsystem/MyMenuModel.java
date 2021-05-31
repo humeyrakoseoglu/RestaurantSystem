@@ -6,7 +6,6 @@ public class MyMenuModel {
     public MyMenuModel(String title, String image) {
         this.title = title;
         this.image = image;
-
     }
 
     public MyMenuModel() {

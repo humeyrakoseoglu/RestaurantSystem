@@ -2,26 +2,15 @@ package com.example.restaurantsystem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class CurrentOrders extends AppCompatActivity {
@@ -33,12 +22,12 @@ public class CurrentOrders extends AppCompatActivity {
     List<String> currentOrderDateList;
     List<String> currentOrderTimeList;
     List<String> currentOrderPriceList;
-    List<String> productsList;
+    List<String> currentOrderCardList;
+    List<String> currentOrderAddressList;
 
     DatabaseReference databaseReference;
-    DatabaseReference databaseReference2;
+
     int icon = R.drawable.current_order;
-    String total="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,28 +36,28 @@ public class CurrentOrders extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        FirebaseDatabase firebaseDatabase2 = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
-        databaseReference2 = firebaseDatabase2.getReference();
-
 
         listView =  findViewById(R.id.currentorders_listView);
-
 
         currentOrderPriceList = new ArrayList<>();
         currentOrderDateList =new ArrayList<>();
         currentOrderTimeList =new ArrayList<>();
-        productsList =new ArrayList<>();
+        currentOrderCardList =new ArrayList<>();
+        currentOrderAddressList =new ArrayList<>();
 
         String a=auth.getCurrentUser().getUid();
+
+        //retrieve current order information from firebase
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(a).child("Order List").child("Current Orders");
-        databaseReference2 = firebaseDatabase2.getInstance().getReference("Users").child(a).child("Order List").child("Current Orders");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 currentOrderDateList.clear();
                 currentOrderTimeList.clear();
                 currentOrderPriceList.clear();
+                currentOrderCardList.clear();
+                currentOrderAddressList.clear();
                 for(DataSnapshot currentOrderDataSnap : snapshot.getChildren()){
                     MyOrderModel myOrderModel = currentOrderDataSnap.getValue(MyOrderModel.class);
 
@@ -80,28 +69,15 @@ public class CurrentOrders extends AppCompatActivity {
 
                     String totalPrice= myOrderModel.getTotalPrice();
                     currentOrderPriceList.add(totalPrice);
+
+                    String cardName= myOrderModel.getCardName();
+                    currentOrderCardList.add(cardName);
+
+                    String addressName= myOrderModel.getAddressName();
+                    currentOrderAddressList.add(addressName);
                 }
 
-         /*       for (int i =0;i<currentOrderDateList.size();i++){
-                    String orderID = "created on "+currentOrderDateList.get(i)+" "+currentOrderTimeList.get(i);
-                    databaseReference2.child(orderID).child("Products");
-                    databaseReference2.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for(DataSnapshot currentOrderProductDataSnap : snapshot.getChildren()){
-                                MyGetProductModel myGetProductModel = currentOrderProductDataSnap.getValue(MyGetProductModel.class);
-                                String title= myGetProductModel.getTitle();
-                                productsList.add(title);
-                            }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-
-                }*/
-                currentOrderAdapter= new CurrentOrderAdapter(getApplicationContext(),currentOrderDateList,currentOrderTimeList,productsList,icon,currentOrderPriceList);
+                currentOrderAdapter= new CurrentOrderAdapter(CurrentOrders.this,currentOrderDateList,currentOrderTimeList,icon,currentOrderPriceList,currentOrderCardList,currentOrderAddressList);
                 listView.setAdapter(currentOrderAdapter);
             }
 
@@ -112,26 +88,5 @@ public class CurrentOrders extends AppCompatActivity {
         });
 
 
-       /* databaseReference2=FirebaseDatabase.getInstance().getReference("Users").child(a).child("Order List").child("Current Orders").child("Products");
-        databaseReference2.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                productsList.clear();
-                for(DataSnapshot currentOrderDataSnap : snapshot.getChildren()){
-                    MyOrderModel myOrderModel = currentOrderDataSnap.getValue(MyOrderModel.class);
-
-                    String title= myOrderModel.getTitle();
-                    productsList.add(title);
-
-                }
-                currentOrderAdapter= new CurrentOrderAdapter(getApplicationContext(),productsList);
-                listView.setAdapter(currentOrderAdapter);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
     }
 }

@@ -5,15 +5,12 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Context;
 import android.os.Bundle;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +23,6 @@ public class PastEvents extends AppCompatActivity {
     List<String> pastEventTitlelist;
     List<String> pastEventDescriptionlist;
     List<String> pastEventImage;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +38,7 @@ public class PastEvents extends AppCompatActivity {
         pastEventDateList =new ArrayList<>();
         pastEventImage = new ArrayList<>();
 
+        // retrieve past events information from firebase
         databaseReference = FirebaseDatabase.getInstance().getReference("PastEvents");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -69,7 +66,6 @@ public class PastEvents extends AppCompatActivity {
                 PastEventAdapter pastEventAdapter=new PastEventAdapter(getApplicationContext(),pastEventDateList,pastEventTitlelist,pastEventDescriptionlist,pastEventImage);
                 viewPager.setAdapter(pastEventAdapter);
                 viewPager.setPadding(100,0,100,0);
-
             }
 
             @Override
@@ -97,6 +93,5 @@ public class PastEvents extends AppCompatActivity {
             }
         });
     }
-
 
 }

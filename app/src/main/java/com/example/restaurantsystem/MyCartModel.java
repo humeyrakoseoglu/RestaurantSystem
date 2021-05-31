@@ -8,7 +8,6 @@ public class MyCartModel {
         this.image = image;
         this.quantity = quantity;
         this.price = price;
-
     }
 
     public MyCartModel() {

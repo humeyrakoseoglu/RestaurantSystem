@@ -29,6 +29,7 @@ public class UserProfile extends AppCompatActivity {
         settingsButton = findViewById(R.id.settings_imageButton);
         TextView logout = findViewById(R.id.userprofile_logout);
 
+        //retrieve user name,surname and phone informations for Profile Page from Firebase
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference();
         databaseReference.child("Users").child(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -38,7 +39,7 @@ public class UserProfile extends AppCompatActivity {
                     User user = task.getResult().getValue(User.class);
                     TextView userName=findViewById(R.id.profile_textView_userName);
                     TextView userPhone=findViewById(R.id.profile_textView_phone);
-                    userName.setText(user.getName()+user.getSurname());
+                    userName.setText(user.getName()+" "+user.getSurname());
                     userPhone.setText(user.getPhone());
                 }else{
                     System.out.println(task.getException().getMessage());
@@ -65,6 +66,7 @@ public class UserProfile extends AppCompatActivity {
         });
 
     }
+
     public void goFavorites(View view){
         Intent intent= new Intent(this, Favorite.class);
         startActivity(intent);

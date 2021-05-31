@@ -8,7 +8,6 @@ public class MyPastEventModel {
         this.description = description;
         this.date = date;
         this.image = image;
-
     }
 
     public MyPastEventModel() {

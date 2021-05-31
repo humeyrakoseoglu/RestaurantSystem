@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         DatabaseReference databaseReference = firebaseDatabase.getReference();
         DatabaseReference childReference = databaseReference.child("BackgroundImage").child("image");
 
-
         childReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -68,8 +67,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent= new Intent(this,Register.class);
         startActivity(intent);
     }
-
-
-
 
 }

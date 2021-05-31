@@ -3,7 +3,6 @@ package com.example.restaurantsystem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.nfc.cardemulation.CardEmulation;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -66,6 +65,7 @@ public class Cards extends AppCompatActivity {
             }
         });
 
+        //retrieve card information from firebase
         if(b=true){
             String a=auth.getCurrentUser().getUid();
             databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(a).child("Credit Cards");
@@ -100,6 +100,7 @@ public class Cards extends AppCompatActivity {
         }
     }
 
+    // add card to Registered Cards List
     public void addCard(String name, String number){
 
         final DatabaseReference cardListRef = FirebaseDatabase.getInstance().getInstance().getReference().child("Users");

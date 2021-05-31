@@ -25,7 +25,6 @@ public class UsersReservations extends AppCompatActivity {
     List<String> reservationPeopleNumber;
     int icon=R.drawable.reserved;
 
-
     private FirebaseAuth auth;
 
     ListView listView;
@@ -42,11 +41,11 @@ public class UsersReservations extends AppCompatActivity {
         reservationTimeList =new ArrayList<>();
         reservationPeopleNumber =new ArrayList<>();
 
-
         auth = FirebaseAuth.getInstance();
 
         String a=auth.getCurrentUser().getUid();
 
+        //retrieve reservations information from User Reservation List in Firebase
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(a)
                 .child("Reservation List");
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -67,7 +66,6 @@ public class UsersReservations extends AppCompatActivity {
 
                     String peopleNum= myReservationModel.getPeopleNumber();
                     reservationPeopleNumber.add(peopleNum);
-
                 }
 
                 usersReservationAdapter= new UsersReservationAdapter(UsersReservations.this,reservationDateList,reservationTimeList,reservationPeopleNumber,icon);
@@ -81,6 +79,4 @@ public class UsersReservations extends AppCompatActivity {
         });
 
     }
-    }
-
-
+}

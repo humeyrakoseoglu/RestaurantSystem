@@ -7,20 +7,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.HashMap;
 
 public class ReservationAdapter  extends ArrayAdapter<String>  {
     Context context;
@@ -29,7 +20,6 @@ public class ReservationAdapter  extends ArrayAdapter<String>  {
     String peopleNumber;
     private FirebaseAuth auth;
     Button reservationButton;
-
 
     public ReservationAdapter(Context context, String date, String time,String peopleNumber) {
         super(context,R.layout.activity_reservation,R.id.reservationTime);

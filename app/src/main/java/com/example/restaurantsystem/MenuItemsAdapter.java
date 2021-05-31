@@ -1,39 +1,29 @@
 package com.example.restaurantsystem;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-
 import static android.content.ContentValues.TAG;
 
 public class MenuItemsAdapter extends ArrayAdapter<String>{
@@ -50,10 +40,7 @@ public class MenuItemsAdapter extends ArrayAdapter<String>{
     Button addFavoritesButton;
     ElegantNumberButton elegantNumberButton;
 
-
     private FirebaseAuth auth;
-
-
 
     public MenuItemsAdapter(Context context, List<String> title, List<String> image, List<String> price) {
         super(context,R.layout.card_item_menu,R.id.bannerIv_carditem_menu,title);
@@ -118,6 +105,7 @@ public class MenuItemsAdapter extends ArrayAdapter<String>{
         return custom;
     }
 
+    // add product to Favorite List when click addFavoritesButton
     private void addtoFavorites(int position) {
 
         String a=auth.getCurrentUser().getUid();
@@ -138,6 +126,7 @@ public class MenuItemsAdapter extends ArrayAdapter<String>{
                 });
     }
 
+    // add product to Cart List when click cartButton
     private void addtoCart(int position, List<String>countlist) {
         String saveCurrentTime, saveCurrentDate;
         Calendar calForDate = Calendar.getInstance();

@@ -1,13 +1,10 @@
 package com.example.restaurantsystem;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,7 +15,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +38,7 @@ public class FragmentMenu extends Fragment {
         menuTitleList =new ArrayList<>();
         menuImagesList =new ArrayList<>();
 
+        //retrieve menu information from firebase
         databaseReference = FirebaseDatabase.getInstance().getReference("Menu");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -68,8 +65,6 @@ public class FragmentMenu extends Fragment {
 
             }
         });
-
-
 
         return view;
     }

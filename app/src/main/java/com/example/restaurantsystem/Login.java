@@ -56,11 +56,13 @@ public class Login extends AppCompatActivity {
         });
     }
 
+
     public void register(View view){
         Intent intent= new Intent(this,Register.class);
         startActivity(intent);
     }
 
+    //reset password
     public void forgot(View v){
         forgotTextLink = findViewById(R.id.forgotPassword);
         forgotTextLink.setOnClickListener(new View.OnClickListener() {

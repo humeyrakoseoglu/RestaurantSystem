@@ -1,7 +1,6 @@
 package com.example.restaurantsystem;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +34,6 @@ public class CartAdapter  extends ArrayAdapter<String> {
     List<Double> totalPriceList;
 
 
-
     public CartAdapter(Context context, List<String> title, List<String> image,List<String> price,List<String> quantity,  List<Double> totalPriceList) {
         super(context,R.layout.card_item_cart,R.id.cart_textView_Title,title);
         this.context = context;
@@ -45,7 +43,6 @@ public class CartAdapter  extends ArrayAdapter<String> {
         this.quantity = quantity;
         this.totalPriceList = totalPriceList;
     }
-
 
 
     @NonNull
@@ -81,6 +78,7 @@ public class CartAdapter  extends ArrayAdapter<String> {
         return custom;
     }
 
+    // remove product from Cart List
     private void remove(int position) {
         String productName= title.get(position);
         cartListRef.child(productName).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {

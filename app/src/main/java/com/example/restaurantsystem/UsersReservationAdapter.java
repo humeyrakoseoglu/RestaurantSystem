@@ -5,20 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.List;
-
 
 public class UsersReservationAdapter extends ArrayAdapter<String> {
     Context context;
@@ -31,7 +22,6 @@ public class UsersReservationAdapter extends ArrayAdapter<String> {
     TextView myPeopleNumber;
     ImageView images;
     int icon;
-
 
     public UsersReservationAdapter(Context context, List<String> date, List<String> time, List<String> peopleNumber,int icon) {
         super(context,R.layout.card_item_reservations,R.id.card_reservationDate,date);

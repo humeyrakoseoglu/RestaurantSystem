@@ -6,8 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.AdapterView;
+
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,8 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -58,7 +56,6 @@ public class Payment extends AppCompatActivity {
     private ArrayList<String> cardNameList = new ArrayList<>();
     private ArrayList<String> addressNameList = new ArrayList<>();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +85,7 @@ public class Payment extends AppCompatActivity {
 
         String a=auth.getCurrentUser().getUid();
 
+        // retrieve product information from Cart List in firebase for payment
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(a).child("Cart List");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -117,7 +115,7 @@ public class Payment extends AppCompatActivity {
         });
 
 
-
+        //when click payButton, add products to Order List with addToOrder method then clear products from Cart List with clearCart method
         payButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,13 +127,13 @@ public class Payment extends AppCompatActivity {
                 addressName= spinnerAddress.getSelectedItem().toString();
                 addtoOrders();
                 clearCart();
-                Intent intent = new Intent(getApplicationContext(),CurrentOrders.class);
-               /* String totalPrice = total;
-                intent.putExtra("totalPrice", totalPrice);*/
+                Intent intent = new Intent(Payment.this,CurrentOrders.class);
                 startActivity(intent);
+
             }
         });
     }
+
 
     private void clearCart() {
         databaseReference.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -148,6 +146,7 @@ public class Payment extends AppCompatActivity {
         });
     }
 
+    // show registered address with Spinner in Payment Page
     private void showAddressNameSpinner() {
         String a=auth.getCurrentUser().getUid();
         databaseReference.child("Users").child(a).child("Addresses").addValueEventListener(new ValueEventListener() {
@@ -168,6 +167,7 @@ public class Payment extends AppCompatActivity {
         });
     }
 
+    // show registered cards with Spinner in Payment Page
     private void showCardNameSpinner() {
         String a=auth.getCurrentUser().getUid();
         databaseReference.child("Users").child(a).child("Credit Cards").addValueEventListener(new ValueEventListener() {
@@ -190,6 +190,7 @@ public class Payment extends AppCompatActivity {
         });
     }
 
+
     private void addtoOrders() {
         String saveCurrentTime, saveCurrentDate;
         Calendar calForDate = Calendar.getInstance();
@@ -205,6 +206,8 @@ public class Payment extends AppCompatActivity {
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getInstance().getReference().child("Users").child(a).child("Order List");
         final HashMap<String, Object> productMap = new HashMap<>();
         final HashMap<String, Object> orderMap = new HashMap<>();
+
+        //add product information from Cart List to Products in Current Order List
         for(int i=0;i<orderTitleList.size();i++) {
             productMap.put("title", orderTitleList.get(i));
             productMap.put("price", orderPriceList.get(i));
@@ -220,6 +223,7 @@ public class Payment extends AppCompatActivity {
                     }
                 });
     }
+        //add order information to Current Order List
         orderMap.put("date",saveCurrentDate);
         orderMap.put("time",saveCurrentTime);
         orderMap.put("totalPrice",total);
@@ -231,6 +235,7 @@ public class Payment extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Toast.makeText(getApplicationContext(),"AddedToOrder",Toast.LENGTH_SHORT).show();
+
             }
         });
 

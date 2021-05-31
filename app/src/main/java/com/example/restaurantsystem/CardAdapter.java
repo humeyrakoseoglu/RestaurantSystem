@@ -9,10 +9,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -75,6 +73,7 @@ public class CardAdapter extends ArrayAdapter<String> {
         return custom;
     }
 
+    // remove card from Registered Card List
     private void remove(int position) {
         String cardID = "card "+nameList.get(position);
         cardListRef.child(cardID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {

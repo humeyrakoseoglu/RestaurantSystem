@@ -36,6 +36,4 @@ public class MyCampaignModel {
     public void setImage(String image) {
         this.image = image;
     }
-
-
 }

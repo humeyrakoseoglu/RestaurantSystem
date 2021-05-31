@@ -55,8 +55,6 @@ public class Register extends AppCompatActivity {
         });
     }
 
-
-
     public void login(View view){
         Intent intent= new Intent(this,Login.class);
         startActivity(intent);
@@ -65,7 +63,6 @@ public class Register extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
     }
 
     public void createUser(View view){
@@ -101,6 +98,8 @@ public class Register extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
+
+                                //load user's information to firebase
                                 User user=new User(name,surname,email,phone,birthday,password);
                                 FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -119,7 +118,6 @@ public class Register extends AppCompatActivity {
                         }
                     });
         }
-
 
     }
 }

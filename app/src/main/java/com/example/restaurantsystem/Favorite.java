@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -14,8 +13,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +45,7 @@ public class Favorite extends AppCompatActivity {
 
         String a=auth.getCurrentUser().getUid();
 
+        //retrieve favorite products information from firebase
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(a)
                 .child("Favorites List");
         databaseReference.addValueEventListener(new ValueEventListener() {
