@@ -36,10 +36,12 @@ public class CurrentOrderAdapter  extends ArrayAdapter<String> {
     List<String> date;
     List<String> time;
     List<String> productsList;
+    List<String> priceList;
 
     ImageView images;
     TextView myDate;
     TextView myTime;
+    TextView myTotalPrice;
     TextView details;
 
     Button cancelButton;
@@ -48,16 +50,16 @@ public class CurrentOrderAdapter  extends ArrayAdapter<String> {
     private FirebaseAuth mAuth;
     DatabaseReference currentOrderListRef;
 
-    double totalPrice=0.0;
     int icon;
 
-    public CurrentOrderAdapter(Context context, List<String> date, List<String> time, List<String> productsList,int icon) {
+    public CurrentOrderAdapter(Context context, List<String> date, List<String> time, List<String> productsList,int icon, List<String> priceList) {
         super(context,R.layout.card_item_currentorder,R.id.currentorders_textView_date_cardItem,date);
         this.context = context;
         this.date = date;
         this.time = time;
         this.productsList = productsList;
         this.icon = icon;
+        this.priceList=priceList;
     }
 
 
@@ -79,8 +81,10 @@ public class CurrentOrderAdapter  extends ArrayAdapter<String> {
         images = custom.findViewById(R.id.currentorders_image_cardItem);
         myDate = custom.findViewById(R.id.currentorders_textView_date_cardItem);
         myTime = custom.findViewById(R.id.currentorders_textView_time_cardItem);
-
         details = custom.findViewById(R.id.textView_products_currentorders);
+        myTotalPrice = custom.findViewById(R.id.textView_totalPrice_currentOrder);
+
+
         String product="";
         for (int i =0;i<productsList.size();i++){
             product+=productsList.get(i)+" ";
@@ -89,10 +93,12 @@ public class CurrentOrderAdapter  extends ArrayAdapter<String> {
 
         cancelButton = custom.findViewById(R.id.cancel_carditem_button_currentOrders);
 
-
+        String totaltext = String.valueOf(priceList.get(position));
         images.setImageResource(icon);
         myDate.setText(date.get(position));
         myTime.setText(time.get(position));
+        myTotalPrice.setText("$"+totaltext);
+
 
         createdDate = myDate.getText().toString();
         createdTime = myTime.getText().toString();
@@ -104,8 +110,9 @@ public class CurrentOrderAdapter  extends ArrayAdapter<String> {
         saveCurrentDate = currentDate.format(calForDate.getTime());
 
         if(!createdDate.equals(saveCurrentDate)){
-            movePastOrder(position);
+            movePastOrder(position,totaltext);
         }
+
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,14 +123,14 @@ public class CurrentOrderAdapter  extends ArrayAdapter<String> {
         return custom;
     }
 
-    private void movePastOrder(int position) {
+    private void movePastOrder(int position,String totaltext) {
         final HashMap<String, Object> orderMap = new HashMap<>();
 
         String a=mAuth.getCurrentUser().getUid();
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getInstance().getReference().child("Users").child(a).child("Order List");
         orderMap.put("date",date.get(position));
         orderMap.put("time",time.get(position));
-        //orderMap.put("totalPrice",totalPrice);
+        orderMap.put("totalPrice",totaltext);
 
         String orderID = "created on "+date.get(position)+" "+time.get(position);
         cartListRef.child("Past Orders").child(orderID).updateChildren(orderMap).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -144,7 +151,22 @@ public class CurrentOrderAdapter  extends ArrayAdapter<String> {
         });
     }
 
-    /* private void getProductsTitle(int position, List<String>productsListt) {
+
+    private void remove(int position) {
+        String orderID = "created on "+date.get(position)+" "+time.get(position);
+        currentOrderListRef.child(orderID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(getContext(),"Order removed successfully",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+}
+
+
+  /* private void getProductsTitle(int position, List<String>productsListt) {
          String a=mAuth.getCurrentUser().getUid();
          String orderID = "created on "+date.get(position)+" "+time.get(position);
          currentOrderListRef.child(orderID).child("Products");
@@ -165,15 +187,3 @@ public class CurrentOrderAdapter  extends ArrayAdapter<String> {
          });
      }
  */
-    private void remove(int position) {
-        String orderID = "created on "+date.get(position)+" "+time.get(position);
-        currentOrderListRef.child(orderID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(getContext(),"Order removed successfully",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-}

@@ -129,6 +129,10 @@ public class Payment extends AppCompatActivity {
                 addressName= spinnerAddress.getSelectedItem().toString();
                 addtoOrders();
                 clearCart();
+                Intent intent = new Intent(getApplicationContext(),CurrentOrders.class);
+               /* String totalPrice = total;
+                intent.putExtra("totalPrice", totalPrice);*/
+                startActivity(intent);
             }
         });
     }

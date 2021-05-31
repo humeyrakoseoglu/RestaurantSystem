@@ -1,15 +1,25 @@
 package com.example.restaurantsystem;
 
 public class MyOrderModel {
-    String date,time;
+    String date,time,totalPrice;
 
-    public MyOrderModel( String date, String time) {
+    public MyOrderModel( String date, String time,String totalPrice) {
 
         this.date = date;
         this.time = time;
+        this.totalPrice = totalPrice;
     }
 
+
     public MyOrderModel() {
+    }
+
+    public String getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(String totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public String getDate() {

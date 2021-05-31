@@ -29,9 +29,12 @@ public class CurrentOrders extends AppCompatActivity {
 
     ListView listView;
     CurrentOrderAdapter currentOrderAdapter;
+
     List<String> currentOrderDateList;
     List<String> currentOrderTimeList;
+    List<String> currentOrderPriceList;
     List<String> productsList;
+
     DatabaseReference databaseReference;
     DatabaseReference databaseReference2;
     int icon = R.drawable.current_order;
@@ -50,12 +53,9 @@ public class CurrentOrders extends AppCompatActivity {
 
 
         listView =  findViewById(R.id.currentorders_listView);
-/*
-        Intent intent = getIntent();
-        total=intent.getStringExtra("totalPrice");
-        double totalprice= Double.parseDouble(total);
-*/
 
+
+        currentOrderPriceList = new ArrayList<>();
         currentOrderDateList =new ArrayList<>();
         currentOrderTimeList =new ArrayList<>();
         productsList =new ArrayList<>();
@@ -68,6 +68,7 @@ public class CurrentOrders extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 currentOrderDateList.clear();
                 currentOrderTimeList.clear();
+                currentOrderPriceList.clear();
                 for(DataSnapshot currentOrderDataSnap : snapshot.getChildren()){
                     MyOrderModel myOrderModel = currentOrderDataSnap.getValue(MyOrderModel.class);
 
@@ -77,8 +78,11 @@ public class CurrentOrders extends AppCompatActivity {
                     String time= myOrderModel.getTime();
                     currentOrderTimeList.add(time);
 
+                    String totalPrice= myOrderModel.getTotalPrice();
+                    currentOrderPriceList.add(totalPrice);
                 }
-                for (int i =0;i<currentOrderDateList.size();i++){
+
+         /*       for (int i =0;i<currentOrderDateList.size();i++){
                     String orderID = "created on "+currentOrderDateList.get(i)+" "+currentOrderTimeList.get(i);
                     databaseReference2.child(orderID).child("Products");
                     databaseReference2.addValueEventListener(new ValueEventListener() {
@@ -96,8 +100,8 @@ public class CurrentOrders extends AppCompatActivity {
                         }
                     });
 
-                }
-                currentOrderAdapter= new CurrentOrderAdapter(getApplicationContext(),currentOrderDateList,currentOrderTimeList,productsList,icon);
+                }*/
+                currentOrderAdapter= new CurrentOrderAdapter(getApplicationContext(),currentOrderDateList,currentOrderTimeList,productsList,icon,currentOrderPriceList);
                 listView.setAdapter(currentOrderAdapter);
             }
 

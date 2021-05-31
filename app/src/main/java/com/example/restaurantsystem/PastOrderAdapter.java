@@ -28,22 +28,24 @@ public class PastOrderAdapter  extends ArrayAdapter<String> {
     Context context;
     List<String> date;
     List<String> time;
-    List<String> productsList;
+    List<String> priceList;
 
     ImageView images;
     TextView myDate;
     TextView myTime;
+    TextView myPrice;
 
     String createdDate,createdTime;
 
     int icon;
 
-    public PastOrderAdapter(Context context, List<String> date, List<String> time,int icon) {
+    public PastOrderAdapter(Context context, List<String> date, List<String> time, List<String> priceList,int icon) {
         super(context,R.layout.card_item_pastorders,R.id.pastorders_textView_date_cardItem,date);
         this.context = context;
         this.date = date;
         this.time = time;
         this.icon = icon;
+        this.priceList = priceList;
     }
 
 
@@ -56,6 +58,7 @@ public class PastOrderAdapter  extends ArrayAdapter<String> {
         images = custom.findViewById(R.id.pastorders_image_cardItem);
         myDate = custom.findViewById(R.id.pastorders_textView_date_cardItem);
         myTime = custom.findViewById(R.id.pastorders_textView_time_cardItem);
+        myPrice = custom.findViewById(R.id.textView_totalPrice_pastorder);
 
         createdDate = myDate.getText().toString();
         createdTime = myTime.getText().toString();
@@ -63,7 +66,7 @@ public class PastOrderAdapter  extends ArrayAdapter<String> {
         images.setImageResource(icon);
         myDate.setText(date.get(position));
         myTime.setText(time.get(position));
-
+        myPrice.setText(priceList.get(position));
 
         return custom;
     }

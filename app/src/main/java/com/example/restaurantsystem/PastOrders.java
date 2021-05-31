@@ -23,6 +23,7 @@ public class PastOrders extends AppCompatActivity {
     PastOrderAdapter pastOrderAdapter;
     List<String> pastOrderDateList;
     List<String> pastOrderTimeList;
+    List<String> pastOrderPriceList;
 
     DatabaseReference databaseReference;
 
@@ -42,6 +43,7 @@ public class PastOrders extends AppCompatActivity {
 
         pastOrderDateList =new ArrayList<>();
         pastOrderTimeList =new ArrayList<>();
+        pastOrderPriceList = new ArrayList<>();
 
 
         String a=auth.getCurrentUser().getUid();
@@ -51,6 +53,7 @@ public class PastOrders extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 pastOrderDateList.clear();
                 pastOrderTimeList.clear();
+                pastOrderPriceList.clear();
                 for(DataSnapshot currentOrderDataSnap : snapshot.getChildren()){
                     MyOrderModel myOrderModel = currentOrderDataSnap.getValue(MyOrderModel.class);
 
@@ -60,8 +63,11 @@ public class PastOrders extends AppCompatActivity {
                     String time= myOrderModel.getTime();
                     pastOrderTimeList.add(time);
 
+                    String totalPrice= myOrderModel.getTotalPrice();
+                    pastOrderPriceList.add(totalPrice);
+
                 }
-                pastOrderAdapter= new PastOrderAdapter(getApplicationContext(),pastOrderDateList,pastOrderTimeList,icon);
+                pastOrderAdapter= new PastOrderAdapter(getApplicationContext(),pastOrderDateList,pastOrderTimeList,pastOrderPriceList,icon);
                 listView.setAdapter(pastOrderAdapter);
             }
 
