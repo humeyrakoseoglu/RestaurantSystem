@@ -69,8 +69,6 @@ public class UpdateProfile extends AppCompatActivity {
     // update information
     public void update(View view){
         if(isNameChanged()|| isSurnameChanged()||isEmailChanged()||isBirthdateChanged()||isPhoneChanged()||isPasswordChanged()){
-            Toast.makeText(this,"Profile informations have been updated.",Toast.LENGTH_SHORT).show();
-            
         }else{
             Toast.makeText(this,"Profile informations have not been updated.",Toast.LENGTH_SHORT).show();
 
